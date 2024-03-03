@@ -1,0 +1,10 @@
+.body {
+    background-color: var(--light-grey);
+    min-height: calc(100vh - 150px);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

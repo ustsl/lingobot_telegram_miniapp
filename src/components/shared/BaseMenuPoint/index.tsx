@@ -1,0 +1,1 @@
+export { BaseMenuPoint } from "./ui/BaseMenuPoint";

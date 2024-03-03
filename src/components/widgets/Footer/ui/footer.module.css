@@ -1,0 +1,12 @@
+.footer {
+    border-top: 1px solid var(--dark);
+    background-color: var(--light-grey);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.link {
+    text-decoration: underline;
+    color: #303030;
+}

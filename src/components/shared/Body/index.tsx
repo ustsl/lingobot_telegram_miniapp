@@ -1,0 +1,1 @@
+export { BodyComponent } from "./ui/Body";

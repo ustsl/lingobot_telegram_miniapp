@@ -1,0 +1,10 @@
+.link {
+    color: var(--dark);
+    text-decoration: none;
+    transition: all .4s ease;
+    font-size: 18px;
+}
+
+.link:hover {
+    color: var(--regular);
+}
