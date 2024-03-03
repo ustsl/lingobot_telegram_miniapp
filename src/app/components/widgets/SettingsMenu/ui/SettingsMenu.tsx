@@ -13,12 +13,14 @@ export const SettingsMenu = () => {
             <div className={styles.grid}>
                 <IconMenuPoint
                     link='https://lingobot.ru/book'
-                    text="Лимиты тренировок"
+                    text="Лимиты слов"
+                    fontSize='S'
                     icon={<FontAwesomeIcon icon={faBarsProgress} />}
                 />
                 <IconMenuPoint
                     link='https://lingobot.ru/book'
                     text="Оплатить"
+                    fontSize='S'
                     icon={<FontAwesomeIcon icon={faWallet} />}
                 />
 

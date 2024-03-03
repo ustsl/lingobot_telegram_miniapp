@@ -1,1 +1,0 @@
-export { UpperMenu } from "./ui/UpperMenu";

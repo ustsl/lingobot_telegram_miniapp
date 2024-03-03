@@ -11,7 +11,7 @@ export const MainMenu = () => {
         <div>
             <PointName text={'Тренировка слов'} />
             <GridBlock gridSize='XS'>
-                <IconMenuPoint text="Добавить новые слова" link="sdf" icon={<FontAwesomeIcon icon={faPlus} />} />
+                <IconMenuPoint text="Учить новые слова" link="sdf" icon={<FontAwesomeIcon icon={faPlus} />} />
                 <IconMenuPoint text="Повторить добавленные" link="sdf" icon={<FontAwesomeIcon icon={faRepeat} />} />
                 <IconMenuPoint text="Настроить категории слов" link="sdf" icon={<FontAwesomeIcon icon={faBars} />} />
             </GridBlock>

@@ -3,8 +3,8 @@
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 20px;
     text-decoration: none;
     color: #303030;
     background-color: #fff;
@@ -32,4 +32,8 @@
 
 .sizeL {
     padding: 20px;
+}
+
+.fontSizeS {
+    font-size: 14px !important;
 }

@@ -1,3 +1,5 @@
 .block {
+    border-top: 1px solid var(--dark);
+    padding-top: 50px;
     margin-top: 20px;
 }

@@ -7,9 +7,9 @@ export const AdditionalLinks = () => {
     return (
         <div className={styles.block}>
             <GridBlock gridSize="S">
-                <BaseMenuPoint text="👉 Сбросить категорию слов УЖЕ ЗНАЮ" link="/" />
-                <BaseMenuPoint text="👉 Сбросить все прогресс" link="/" />
-                <BaseMenuPoint text="📚 О приложении" link="/" />
+                <BaseMenuPoint text="👉 Сбросить категорию УЖЕ ЗНАЮ" link="/" />
+                <BaseMenuPoint text="👉 Сбросить весь прогресс" link="/" />
+                <BaseMenuPoint text="📚 Как эффективно учить слова" link="/" />
             </GridBlock>
         </div>
     )

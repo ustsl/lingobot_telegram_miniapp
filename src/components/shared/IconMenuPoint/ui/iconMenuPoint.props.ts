@@ -8,4 +8,5 @@ export interface IIconMenuPoint {
     icon: ReactNode;
     iconColor?: string;
     size?: baseSizes;
+    fontSize?: baseSizes;
 }
