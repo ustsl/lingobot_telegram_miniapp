@@ -1,12 +1,18 @@
-
 import { baseSizes } from '@/types/baseTypes';
 import { ReactNode } from 'react';
 
-export interface IIconMenuPoint {
+
+export interface IIconMenuBase {
     text: string;
-    link: string;
     icon: ReactNode;
-    iconColor?: string;
     size?: baseSizes;
     fontSize?: baseSizes;
+}
+
+export interface IIconMenuPoint extends IIconMenuBase {
+    link: string;
+}
+
+export interface IIconMenuButtonPoint extends IIconMenuBase {
+    onClick: () => void;
 }

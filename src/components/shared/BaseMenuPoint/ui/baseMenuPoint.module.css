@@ -1,5 +1,5 @@
 .link {
-    color: var(--dark);
+    color: var(--tg-theme-link-color);
     text-decoration: none;
     transition: all .4s ease;
     font-size: 18px;

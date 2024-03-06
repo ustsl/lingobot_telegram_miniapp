@@ -1,8 +1,15 @@
 .header {
-    padding: 10px 20px;
+    padding: 4px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
+    color: var(--tg-theme-hint-color);
+    background-color: var(--tg-theme-secondary-bg-color);
+    font-size: 12px;
+}
+
+.data {
+    margin-top: 0px;
 }

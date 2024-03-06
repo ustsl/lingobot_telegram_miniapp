@@ -1,8 +1,6 @@
 .pointName {
-    color: var(--dark);
+    color: var(--tg-theme-hint-color);
     font-size: 14px;
     font-weight: 400;
-    border-bottom: 4px solid var(--light);
-    padding-bottom: 2px;
     width: fit-content;
 }

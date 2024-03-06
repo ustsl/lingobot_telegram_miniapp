@@ -1,0 +1,4 @@
+.word {
+    font-size: 30px;
+    color: var(--tg-theme-accent-text-color);
+}

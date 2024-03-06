@@ -1,0 +1,1 @@
+export { TranslateComponent } from "./ui/TranslateComponent";

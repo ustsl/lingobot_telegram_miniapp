@@ -1,0 +1,1 @@
+export { WordNameComponent } from "./ui/WordNameComponent";

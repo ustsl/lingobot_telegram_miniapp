@@ -1,9 +1,9 @@
 import styles from './iconMenuPoint.module.css';
 import Link from "next/link";
-import { IIconMenuPoint } from "./iconMenuPoint.props";
+import { IIconMenuButtonPoint, IIconMenuPoint } from "./iconMenuPoint.props";
 import classNames from 'classnames';
 
-export const IconMenuPoint = ({ link, text, icon, iconColor, size, fontSize }: IIconMenuPoint) => {
+export const IconMenuPoint = ({ link, text, icon, size, fontSize }: IIconMenuPoint) => {
 
     const linkClassName = classNames(styles.iconLink, {
         [styles[`size${size}`]]: size,
@@ -11,15 +11,27 @@ export const IconMenuPoint = ({ link, text, icon, iconColor, size, fontSize }: I
     });
 
 
-
-    const iconClassName = classNames(styles.icon, {
-        [styles[`${iconColor}IconColor`]]: iconColor,
-    });
-
     return (
         <Link href={link} className={linkClassName}>
-            <div className={iconClassName}>{icon}</div>
+            <div className={styles.icon}>{icon}</div>
             <span>{text}</span>
         </Link>
+    );
+}
+
+
+export const IconMenuButtonPoint = ({ onClick, text, icon, size, fontSize }: IIconMenuButtonPoint) => {
+
+    const linkClassName = classNames(styles.iconLink, {
+        [styles[`size${size}`]]: size,
+        [styles[`fontSize${fontSize}`]]: fontSize
+    });
+
+
+    return (
+        <button onClick={onClick} className={linkClassName}>
+            <div className={styles.icon}>{icon}</div>
+            <span>{text}</span>
+        </button>
     );
 }

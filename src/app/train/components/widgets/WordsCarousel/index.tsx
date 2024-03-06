@@ -1,0 +1,1 @@
+export { WordsCarousel } from "./ui/WordsCarousel";

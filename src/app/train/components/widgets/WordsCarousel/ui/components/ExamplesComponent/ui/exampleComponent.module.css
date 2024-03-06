@@ -1,0 +1,40 @@
+.examples {
+    display: grid;
+    gap: 10px;
+}
+
+.examples h4 {
+    color: var(--tg-theme-hint-color);
+}
+
+.list {
+    overflow-y: scroll;
+    background-color: var(--tg-theme-secondary-bg-color);
+    padding: 20px 10px;
+    border-radius: var(--border-radius);
+    margin: 0px -10px;
+    height: 250px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.example {
+    margin-top: 20px;
+    display: grid;
+    gap: 5px;
+    color: var(--tg-theme-text-color);
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--tg-theme-hint-color);
+}
+
+.example:first-child {
+    margin-top: 0px;
+}
+
+.example:last-child {
+    border-bottom: 0px;
+}
+
+.ru {
+    font-size: 14px;
+}

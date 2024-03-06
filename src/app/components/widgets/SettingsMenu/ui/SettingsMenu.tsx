@@ -4,16 +4,17 @@ import { PointName } from '@/components/shared/PointName'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsProgress, faBook, faWallet } from '@fortawesome/free-solid-svg-icons'
 import { IconMenuPoint } from '@/components/shared/IconMenuPoint/ui/IconMenuPoint';
+import { GridBlock } from '@/components/shared/GridBlock';
 
 
 export const SettingsMenu = () => {
     return (
-        <div>
-            <PointName text={'Настройки'} />
+        <GridBlock gridSize='XS'>
+            <PointName text={'Управление'} />
             <div className={styles.grid}>
                 <IconMenuPoint
                     link='https://lingobot.ru/book'
-                    text="Лимиты слов"
+                    text="Настройки тренировок"
                     fontSize='S'
                     icon={<FontAwesomeIcon icon={faBarsProgress} />}
                 />
@@ -28,6 +29,6 @@ export const SettingsMenu = () => {
 
 
 
-        </div>
+        </GridBlock>
     )
 }

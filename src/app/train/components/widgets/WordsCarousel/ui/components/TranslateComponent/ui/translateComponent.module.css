@@ -1,0 +1,12 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 25px;
+    color: var(--tg-theme-section-header-text-color);
+}
+
+.transcription {
+    font-size: 18px;
+}
