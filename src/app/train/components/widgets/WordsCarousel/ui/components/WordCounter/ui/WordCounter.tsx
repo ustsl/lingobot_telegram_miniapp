@@ -1,7 +1,7 @@
 import styles from './wordCounter.module.css';
 
-export const WordCounter = ({ counter }: { counter: number }) => {
+export const WordCounter = ({ counter }: { counter: string }) => {
     return (
-        <div className={styles.progress}>Осталось слов: {counter}</div>
+        <div className={styles.progress}> {counter}</div>
     )
 }

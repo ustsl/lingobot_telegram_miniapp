@@ -1,15 +1,11 @@
 'use client'
 import styles from './header.module.css';
-import { useState, useEffect } from 'react'
-
-import { useTelegram } from '@/hooks/useTelegram';
 
 
 
 import { Logo } from "@/components/shared/Logo"
-import { postResponse } from '@/api/restAPI';
-import { getDate } from '@/functions/getDate';
-import { useBaseStore, useUserStore } from '@/store/useStore';
+
+import { useUserStore } from '@/store/useStore';
 
 export const Header = () => {
 

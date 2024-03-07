@@ -3,18 +3,20 @@
     justify-content: center;
     align-items: center;
     padding: 30px 20px;
-    width: 100%;
     border: 0;
     border-radius: var(--border-radius);
     background-color: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
-    transition: all .4s ease;
+    transition: transform .4s ease, opacity .4s ease;
     font-size: 20px;
-    opacity: .9;
 }
 
 .button:hover {
     opacity: .8;
+}
+
+.button:active {
+    transform: scale(0.98);
 }
 
 .successStyle {

@@ -11,6 +11,12 @@
   --middle: #A0BBF2;
   --light: #D5E2F2;
   --success: #25D952;
+
+  --tg-theme-bg-color: white;
+  --tg-theme-subtitle-text-color: #303030;
+  --tg-theme-button-color: #5576D9;
+  --tg-theme-hint-color: #595959;
+
 }
 
 body {
@@ -18,6 +24,7 @@ body {
   margin: 0 auto;
   font-size: 16px;
   background-color: var(--tg-theme-bg-color);
+  box-sizing: border-box;
 }
 
 .h1,

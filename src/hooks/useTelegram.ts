@@ -26,9 +26,7 @@ declare global {
 export function useTelegram() {
 
     const tg = useBaseStore((state: any) => state.tg)
-
     const setTg = useBaseStore((state: any) => state.setTg)
-
 
     useEffect(() => {
 

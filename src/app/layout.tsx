@@ -4,8 +4,7 @@ import { Manrope } from 'next/font/google'
 import './globals.css'
 import { ScriptsBlock } from '@/components/shared/ScriptComponent/ui/ScriptComponent'
 import { TelegramWrapper } from '@/components/shared/TelegramWrapper'
-import { Header } from '@/components/widgets/Header'
-import { Footer } from '@/components/widgets/Footer'
+
 
 
 const inter = Manrope({ subsets: ['latin', 'cyrillic'] })

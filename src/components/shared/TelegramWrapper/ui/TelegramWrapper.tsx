@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => {
 
-    const { tg } = useTelegram();
+    const { tg } = useTelegram()
 
     const userId = useBaseStore((state: any) => state.userId)
     const isLoad = useUserStore((state: any) => state.isLoad)

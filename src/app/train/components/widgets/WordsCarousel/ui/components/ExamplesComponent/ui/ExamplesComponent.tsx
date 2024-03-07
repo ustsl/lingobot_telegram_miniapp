@@ -2,6 +2,7 @@ import styles from './exampleComponent.module.css';
 
 import { ISentence } from "../../../wordsCarousel.props"
 import { PointName } from '@/components/shared/PointName';
+import { SimpleSlider } from '@/components/features/SimpleSlider';
 
 export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
     const shuffleArray = (array: ISentence[]) => {
@@ -18,17 +19,19 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
         <div className={styles.examples}>
             <PointName text="Примеры" />
             <div className={styles.list}>
-                {shuffledExamples.map(item => {
-                    return (<div key={item.pk} className={styles.example}>
-                        <p className={styles.tr}>
-                            {item.sentence}
-                        </p>
-                        <p className={styles.ru}>
-                            {item.ru}
-                        </p>
+                <SimpleSlider>
+                    {shuffledExamples.map(item => {
+                        return (<div key={item.pk} className={styles.example}>
+                            <p className={styles.tr}>
+                                {item.sentence}
+                            </p>
+                            <p className={styles.ru}>
+                                {item.ru}
+                            </p>
 
-                    </div>)
-                })}
+                        </div>)
+                    })}
+                </SimpleSlider>
             </div>
         </div>
     );
