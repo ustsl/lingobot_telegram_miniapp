@@ -21,7 +21,6 @@ export const MainMenu = () => {
 
                 <IconMenuPoint text="Учить новые слова" link="/train/new" icon={<FontAwesomeIcon icon={faPlus} />} />
                 <IconMenuPoint text="Повторить добавленные" link="/train/repeat" icon={<FontAwesomeIcon icon={faRepeat} />} />
-                <IconMenuPoint text="Настроить категории слов" link="/" icon={<FontAwesomeIcon icon={faBars} />} />
                 <IconMenuButtonPoint text="Статистика выученных слов"
                     onClick={statTgHandler}
                     icon={<FontAwesomeIcon

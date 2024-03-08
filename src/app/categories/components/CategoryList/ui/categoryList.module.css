@@ -1,0 +1,11 @@
+.label {
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    color: var(--tg-theme-text-color);
+    font-weight: 500;
+}
+
+.input {
+    width: 20px;
+}

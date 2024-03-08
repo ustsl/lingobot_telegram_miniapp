@@ -17,7 +17,7 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const setNewWordLimit = useUserStore((state: any) => state.setNewWordLimit)
     const setRepeatWordLimit = useUserStore((state: any) => state.setRepeatWordLimit)
     const setTrainType = useUserStore((state: any) => state.setTrainType)
-
+    const setUserCategories = useUserStore((state: any) => state.setUserCategories)
 
     useEffect(() => {
         if (userId) {
@@ -40,6 +40,8 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
                 const trainType = result?.user_data?.train_type
                 const newWordLimit = result?.user_data?.new_word_limit
                 const repeatWordLimit = result?.user_data?.repeat_word_limit
+                const userCategories = result?.user_categories
+                console.log(userCategories)
 
                 if (paymentFunction) {
                     setSubscribeFinishDate(getDate(paymentFunction))
@@ -53,6 +55,9 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
                 }
                 if (trainType) {
                     setTrainType(trainType)
+                }
+                if (userCategories) {
+                    setUserCategories(userCategories)
                 }
             } else {
                 console.log('bad')

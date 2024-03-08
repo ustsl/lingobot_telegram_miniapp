@@ -26,6 +26,8 @@ export async function getBaseQuery(method: string) {
 }
 
 
+
+
 export async function getResponse({ token, method }: IAPI) {
   const url = API_DOMAIN + API_VERSION + method;
   const headers = createHeaders(token)

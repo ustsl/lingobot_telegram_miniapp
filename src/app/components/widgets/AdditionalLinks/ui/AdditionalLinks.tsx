@@ -6,10 +6,10 @@ import { GridBlock } from "@/components/shared/GridBlock"
 export const AdditionalLinks = () => {
     return (
         <div className={styles.block}>
-            <GridBlock gridSize="S">
+            <GridBlock gridSize="XS">
                 <BaseMenuPoint text="👉 Сбросить категорию УЖЕ ЗНАЮ" link="/" />
-                <BaseMenuPoint text="👉 Сбросить весь прогресс" link="/" />
                 <BaseMenuPoint text="📚 Как эффективно учить слова" link="/" />
+                <BaseMenuPoint text="📚 О приложении" link="/" />
             </GridBlock>
         </div>
     )

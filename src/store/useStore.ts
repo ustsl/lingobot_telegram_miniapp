@@ -18,12 +18,14 @@ export const useBaseStore = create((set) => ({
 export const useUserStore = create((set) => ({
     isLoad: false,
     newWordLimit: 5,
-    repeatWordLimit: 10,
+    repeatWordLimit: 5,
     trainType: "TR",
     subscribeFinishDate: "",
+    userCategories: [],
     setIsLoad: (isLoad: boolean) => set({ isLoad: isLoad }),
     setNewWordLimit: (limit: number) => set({ newWordLimit: limit }),
     setRepeatWordLimit: (limit: number) => set({ repeatWordLimit: limit }),
     setSubscribeFinishDate: (date: string) => set({ subscribeFinishDate: date }),
     setTrainType: (trainType: number) => set({ trainType: trainType }),
+    setUserCategories: (userCategories: number[]) => set({ userCategories: userCategories }),
 }))
