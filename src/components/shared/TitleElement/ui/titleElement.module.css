@@ -1,0 +1,12 @@
+.title {
+    margin: 0px;
+    color: #303030;
+}
+
+.green {
+    color: var(--green);
+}
+
+.light {
+    font-weight: 500;
+}

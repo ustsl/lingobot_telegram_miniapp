@@ -6,8 +6,8 @@ export const useBaseStore = create((set) => ({
     userId: null,
     setTg: (tg: any) => set(() => ({
         tg: tg,
-        // userId: tg?.initDataUnsafe?.user?.id
-        userId: 123123123
+        userId: tg?.initDataUnsafe?.user?.id
+        //userId: 123123123
     })),
     removeTg: () => set({ tg: null }),
     removeUserId: () => set({ userId: null }),

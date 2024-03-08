@@ -41,7 +41,6 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
                 const newWordLimit = result?.user_data?.new_word_limit
                 const repeatWordLimit = result?.user_data?.repeat_word_limit
                 const userCategories = result?.user_categories
-                console.log(userCategories)
 
                 if (paymentFunction) {
                     setSubscribeFinishDate(getDate(paymentFunction))

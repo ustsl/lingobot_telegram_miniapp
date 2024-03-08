@@ -3,6 +3,13 @@
     text-decoration: none;
     transition: all .4s ease;
     font-size: 18px;
+    border: 0;
+    background-color: unset;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    cursor: pointer;
+    text-align: left;
 }
 
 .link:hover {

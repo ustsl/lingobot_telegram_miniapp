@@ -18,7 +18,6 @@ export default function Home() {
         <MainMenu />
         <BookLink />
         <SettingsMenu />
-        <AdditionalLinks />
       </BodyComponent>
       <Footer />
     </>

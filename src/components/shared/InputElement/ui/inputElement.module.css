@@ -1,0 +1,63 @@
+.inputElem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputElem input {
+    width: 100%;
+    max-width: 630px;
+}
+
+.textareaElem {
+    display: grid;
+    gap: 15px;
+    width: 100%;
+}
+
+.inputElem label,
+.textareaElem label {
+    font-weight: 500;
+    color: var(--tg-theme-hint-color);
+}
+
+.field {
+    padding: 10px 15px;
+    font-size: 20px;
+    padding-left: 20px;
+    border: 1px solid var(--tg-theme-hint-color);
+    background-color: var(--tg-theme-secondary-bg-color);
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 300px;
+    color: var(--tg-theme-text-color);
+}
+
+input[type="color"].field {
+
+    min-height: 60px;
+    max-width: 300px;
+}
+
+.areaField {
+    height: unset;
+}
+
+
+.xsInput {
+    font-size: 15px;
+    line-height: 15px;
+    padding-left: 10px;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.strong {
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .field {
+        min-width: 280px;
+    }
+}

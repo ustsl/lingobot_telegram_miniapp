@@ -1,15 +1,31 @@
 import styles from './additionalLinks.module.css';
 
-import { BaseMenuPoint } from "@/components/shared/BaseMenuPoint"
+import { BaseMenuButtonPoint, } from "@/components/shared/BaseMenuPoint"
 import { GridBlock } from "@/components/shared/GridBlock"
+import { useTelegram } from '@/hooks/useTelegram';
 
 export const AdditionalLinks = () => {
+
+    const { tg } = useTelegram()
+
+    function resetTgHandler() {
+        tg.sendData('resetWords');
+    }
+
+    function aboutTgHandler() {
+        tg.sendData('about');
+    }
+
+    function methodTgHandler() {
+        tg.sendData('method');
+    }
+
     return (
         <div className={styles.block}>
             <GridBlock gridSize="XS">
-                <BaseMenuPoint text="👉 Сбросить категорию УЖЕ ЗНАЮ" link="/" />
-                <BaseMenuPoint text="📚 Как эффективно учить слова" link="/" />
-                <BaseMenuPoint text="📚 О приложении" link="/" />
+                <BaseMenuButtonPoint text="👉 Сбросить слова, отмеченные как УЖЕ ЗНАЮ" onClick={resetTgHandler} />
+                <BaseMenuButtonPoint text="📚 Как эффективно учить слова" onClick={aboutTgHandler} />
+                <BaseMenuButtonPoint text="📚 О приложении" onClick={methodTgHandler} />
             </GridBlock>
         </div>
     )

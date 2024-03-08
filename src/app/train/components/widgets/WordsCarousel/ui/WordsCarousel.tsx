@@ -27,9 +27,7 @@ function sendProgress(userId: number | string, word: string, isRaise: 0 | 1, isS
             repeat: isRepeat
         }
     }
-    postResponse(data).then((res) => {
-        console.log(res)
-    });
+    postResponse(data);
 }
 
 export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 'repeat' }) => {

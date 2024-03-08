@@ -41,11 +41,8 @@ export async function getResponse({ token, method }: IAPI) {
 
 
 export async function postResponse({ method, data }: { method: string, data: any }) {
-  console.log('postResponse')
 
   const url = API_DOMAIN + API_VERSION + method;
-  console.log(url)
-  console.log(data)
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -53,8 +50,6 @@ export async function postResponse({ method, data }: { method: string, data: any
     },
     body: JSON.stringify(data)
   });
-
-  console.log(res)
 
 
   if (!res.ok) {
