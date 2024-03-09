@@ -71,7 +71,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             sendProgress(userId, wordList[0].word, 0, 1, 0)
             if (result && result?.word_list && result?.status && (result.word_list).length > 0) {
                 const item = result.word_list[0]
-                setWordList([...wordList.slice(1), item])
+                setWordList([item, ...wordList.slice(1)])
             } else {
                 setWordList([...wordList.slice(1)])
             }
