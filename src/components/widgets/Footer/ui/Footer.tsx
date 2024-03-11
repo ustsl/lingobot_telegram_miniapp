@@ -1,11 +1,10 @@
-import { BaseMenuPoint } from '@/components/shared/BaseMenuPoint';
 import styles from './footer.module.css';
 import Link from "next/link"
 
 export const Footer = () => {
     return (
         <div className={styles.footer}>
-            <BaseMenuPoint text="Написать администратору" link="https://t.me/ustsl" />
+            <Link href='https://t.me/ustsl' className={styles.link}>Техническая поддержка</Link>
         </div>
     )
 }

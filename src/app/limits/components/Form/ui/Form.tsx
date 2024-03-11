@@ -43,8 +43,13 @@ export const NumberForm = () => {
                 repeat_word_limit: repeatLimit
             }
         }
-        postResponse(data).then(() => {
-            setNotificationMessage('Изменения успешно сохранены')
+        postResponse(data).then((res) => {
+            if (res?.status == false) {
+                setNotificationMessage('Для изменения лимитов требуется подписка. Вне подписки лимиты всегда равны 3/3.')
+            } else {
+                setNotificationMessage('Изменения успешно сохранены')
+            }
+
         });
         setIsChange(false);
     };

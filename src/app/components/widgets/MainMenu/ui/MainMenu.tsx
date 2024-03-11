@@ -19,5 +19,6 @@ export const MainMenu = () => {
                 <IconMenuPoint text="Повторить добавленные" link="/train/repeat" icon={<FontAwesomeIcon icon={faRepeat} />} size='L' />
             </GridBlock>
         </GridBlock>
+
     )
 }

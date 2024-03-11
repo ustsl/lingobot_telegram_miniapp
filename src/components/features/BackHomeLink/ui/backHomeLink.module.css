@@ -1,8 +1,7 @@
 .link {
     display: flex;
-    gap: 5px;
-    margin-top: 20px;
-    max-width: 250px;
+    gap: 1px;
+    max-width: fit-content;
     color: var(--tg-theme-link-color);
     text-decoration: none;
     text-align: left;

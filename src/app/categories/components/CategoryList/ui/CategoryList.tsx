@@ -42,6 +42,7 @@ export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
             }
         };
         postResponse(data).then(() => {
+            console.log(data)
             setNotificationMessage('Изменения успешно сохранены')
         });
         setIsChange(false);

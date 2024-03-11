@@ -13,6 +13,7 @@ import { Logo } from '@/components/shared/Logo';
 import { WordComponent } from './components/WordComponent';
 import { ButtonComponent } from '../../../shared/ButtonComponent';
 import { ErrorComponent, SuccessComponent } from './components/StatusComponent';
+import { BackHomeLink } from '@/components/features/BackHomeLink';
 
 
 
@@ -123,13 +124,16 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     return (
         <div>
             <div className={styles.flex}>
-                <Logo />
+
+                <BackHomeLink />
+
                 {phase == 'new' && step < wordList.length ?
                     <WordCounter counter={`Добавлено: ${step} из ${wordList.length} слов`} /> :
                     <WordCounter counter={`Осталось выучить: ${wordList.length}`} />
                 }
-
             </div>
+
+
             {wordList.length > 0 && generateWord()}
 
             {isLoad && wordList.length > 0 &&
