@@ -2,7 +2,7 @@
     padding: 3px 20px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: end;
     color: var(--tg-theme-hint-color);
     background-color: var(--tg-theme-header-bg-color);
     font-size: 12px;
