@@ -8,7 +8,7 @@
     border-radius: var(--border-radius);
     background-color: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
-    font-size: 40px;
+    font-size: 30px;
     cursor: pointer;
     transition: all .4s ease;
 }

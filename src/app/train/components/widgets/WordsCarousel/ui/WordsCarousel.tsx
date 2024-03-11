@@ -129,7 +129,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
 
                 {phase == 'new' && step < wordList.length ?
                     <WordCounter counter={`Добавлено: ${step} из ${wordList.length} слов`} /> :
-                    <WordCounter counter={`Осталось выучить: ${wordList.length}`} />
+                    <WordCounter counter={`Осталось: ${wordList.length}`} />
                 }
             </div>
 
