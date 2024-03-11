@@ -2,6 +2,7 @@
 
 import { postResponse } from '@/api/restAPI';
 import { ButtonComponent } from '@/app/train/components/shared/ButtonComponent';
+import { NotificationComponent } from '@/components/features/NotificationMessage';
 import { GridBlock } from '@/components/shared/GridBlock';
 import { InputElement } from '@/components/shared/InputElement';
 import { useBaseStore, useUserStore } from '@/store/useStore';
@@ -17,7 +18,7 @@ export const NumberForm = () => {
     const [newLimit, setNewLimit] = useState<number>(newWordLimit);
     const [repeatLimit, setRepeatLimit] = useState<number>(repeatWordLimit);
     const [isChange, setIsChange] = useState(false);
-
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     const handleInputChange = (e: any, setter: any) => {
         setIsChange(true);
@@ -31,6 +32,7 @@ export const NumberForm = () => {
 
     // Функция для обработки нажатия на кнопку "Сохранить"
     const handleSave = () => {
+        setNotificationMessage('');
         setNewWordLimit(newLimit);
         setRepeatWordLimit(repeatLimit)
         const data = {
@@ -41,7 +43,9 @@ export const NumberForm = () => {
                 repeat_word_limit: repeatLimit
             }
         }
-        postResponse(data);
+        postResponse(data).then(() => {
+            setNotificationMessage('Изменения успешно сохранены')
+        });
         setIsChange(false);
     };
 
@@ -61,7 +65,8 @@ export const NumberForm = () => {
                 handler={(e: any) => handleInputChange(e, setRepeatLimit)} />
 
 
-            {isChange ? <ButtonComponent text="Сохранить" onClick={handleSave} /> : <p>Несохраненные изменения отсутствуют</p>}
+            {isChange && <ButtonComponent text="Сохранить" onClick={handleSave} />}
+            {notificationMessage && <NotificationComponent message={notificationMessage} />}
 
         </GridBlock>
     );
