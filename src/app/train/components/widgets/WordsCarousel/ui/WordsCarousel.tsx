@@ -68,6 +68,8 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             method: '/word/get_new_word_one/',
             data: { user: userId, exception_word: wordList[0].pk }
         }
+        console.log(wordList[0])
+        console.log(data.data.exception_word)
         postResponse(data).then((result: any) => {
             sendProgress(userId, wordList[0].word, 0, 1, 0)
             if (result && result?.word_list && result?.status && (result.word_list).length > 0) {
