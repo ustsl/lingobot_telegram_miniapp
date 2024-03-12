@@ -70,12 +70,12 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
 
         const data = {
             method: '/word/get_new_word_one/',
-            // Преобразование Set обратно в массив для отправки
-            data: { user: userId, exception_word: Array.from(updatedExceptions) }
+            data: { user: userId, exception_word: Array.from(updatedExceptions).join(',') }
         };
 
         // Обновление состояния exceptions с использованием уникальных значений
         setExceptions(Array.from(updatedExceptions));
+        console.log(Array.from(updatedExceptions).join(','))
 
         postResponse(data).then((result: any) => {
             sendProgress(userId, wordList[0].word, 0, 1, 0)
