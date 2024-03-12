@@ -66,7 +66,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     function handleReplaceWord() {
         const data = {
             method: '/word/get_new_word_one/',
-            data: { user: userId }
+            data: { user: userId, exception_word: wordList[0].pk }
         }
         postResponse(data).then((result: any) => {
             sendProgress(userId, wordList[0].word, 0, 1, 0)
