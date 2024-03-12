@@ -39,6 +39,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     const [wordList, setWordList] = useState<any[]>([])
     const userId = useBaseStore((state: any) => state.userId)
     const trainType = useUserStore((state: any) => state.trainType)
+    const [exceptions, setExceptions] = useState<any[]>([])
 
 
     useEffect(() => {
@@ -64,12 +65,18 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     function handleReplaceWord() {
+
+        const updatedExceptions = new Set([...exceptions, wordList[0].pk]);
+
         const data = {
             method: '/word/get_new_word_one/',
-            data: { user: userId, exception_word: wordList[0].pk }
-        }
-        console.log(wordList[0])
-        console.log(data.data.exception_word)
+            // Преобразование Set обратно в массив для отправки
+            data: { user: userId, exception_word: Array.from(updatedExceptions) }
+        };
+
+        // Обновление состояния exceptions с использованием уникальных значений
+        setExceptions(Array.from(updatedExceptions));
+
         postResponse(data).then((result: any) => {
             sendProgress(userId, wordList[0].word, 0, 1, 0)
             if (result && result?.word_list && result?.status && (result.word_list).length > 0) {
