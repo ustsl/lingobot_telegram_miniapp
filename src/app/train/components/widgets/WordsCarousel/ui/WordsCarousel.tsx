@@ -9,27 +9,12 @@ import { IWordEntry } from "./wordsCarousel.props";
 
 import { WordCounter } from "./components/WordCounter";
 
-import { Logo } from '@/components/shared/Logo';
 import { WordComponent } from './components/WordComponent';
 import { ButtonComponent } from '../../../shared/ButtonComponent';
 import { ErrorComponent, SuccessComponent } from './components/StatusComponent';
 import { BackHomeLink } from '@/components/features/BackHomeLink';
+import { sendProgress } from '@/functions/sendProgress';
 
-
-
-function sendProgress(userId: number | string, word: string, isRaise: 0 | 1, isStudied: 0 | 1, isRepeat: 0 | 1) {
-    const data = {
-        method: '/customer/create_progress/',
-        data: {
-            user: userId,
-            word: word,
-            raise_progress: isRaise,
-            is_studied: isStudied,
-            repeat: isRepeat
-        }
-    }
-    postResponse(data);
-}
 
 export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 'repeat' }) => {
     const [isLoad, setIsLoad] = useState(false);
@@ -41,6 +26,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     const trainType = useUserStore((state: any) => state.trainType)
     const [exceptions, setExceptions] = useState<any[]>([])
 
+    const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
         console.log('trainUseEffect')
@@ -49,6 +35,21 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
+
+    const handleActionWithFadeOut = (action: any) => {
+        setFadeOut(true);
+
+        setTimeout(() => {
+            action();
+
+        }, 200);
+    };
+
+
+    useEffect(() => {
+        setFadeOut(false);
+    }, [wordList])
+
 
     function handleScrollWord(repeat: 0 | 1) {
         setStep(prevStep => prevStep + 1);
@@ -73,9 +74,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             data: { user: userId, exception_word: Array.from(updatedExceptions).join(',') }
         };
 
-        // Обновление состояния exceptions с использованием уникальных значений
         setExceptions(Array.from(updatedExceptions));
-        console.log(Array.from(updatedExceptions).join(','))
 
         postResponse(data).then((result: any) => {
             sendProgress(userId, wordList[0].word, 0, 1, 0)
@@ -126,9 +125,14 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     const generateWord = () => {
-        const item = wordList[0] as IWordEntry
-        return <WordComponent item={item} wordKey={wordKey} translateKey={translateKey} />
-    }
+        const item = wordList[0];
+        return (
+            <div className={`${styles.wrapper} ${fadeOut ? styles.fadeOut : ''}`}>
+                <WordComponent item={item} wordKey={wordKey} translateKey={translateKey} />
+            </div>
+        );
+    };
+
 
     return (
         <div>
@@ -150,13 +154,23 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                     {phase == 'new' && step < wordList.length ?
                         (
                             <>
-                                <ButtonComponent onClick={() => handleScrollWord(0)} text="Изучить" color="success" />
-                                <ButtonComponent onClick={handleReplaceWord} text="Уже знаю" />
+                                <ButtonComponent
+                                    onClick={() => handleActionWithFadeOut(() => handleScrollWord(0))}
+                                    text="Изучить" color="success" />
+                                <ButtonComponent
+                                    onClick={() => handleActionWithFadeOut(() => handleReplaceWord())}
+                                    text="Уже знаю" />
                             </>
                         ) :
                         <>
-                            <ButtonComponent onClick={() => { handleRememberWord(phase) }} text="Вспомнил" color="success" />
-                            <ButtonComponent onClick={() => handleScrollWord(1)} text="Не вспомнил" />
+
+                            <ButtonComponent
+                                onClick={() => handleActionWithFadeOut(() => handleRememberWord(phase))}
+                                text="Вспомнил" color="success" />
+                            <ButtonComponent
+                                onClick={() => handleActionWithFadeOut(() => handleScrollWord(1))}
+                                text="Не вспомнил" />
+
                         </>
 
                     }
@@ -170,7 +184,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             {
                 isLoad && !isActive && wordList.length == 0 &&
                 <>
-                    {limit == 0 ?
+                    {limit === 0 ?
                         <ErrorComponent
                             text="Вами был исчерпан установленный суточный лимит слов. Измените настройки, или продолжите завтра." /> :
                         <>
