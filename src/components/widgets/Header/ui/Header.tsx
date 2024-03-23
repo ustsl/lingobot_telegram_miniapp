@@ -15,7 +15,7 @@ export const Header = () => {
     return (
         <div className={styles.header}>
             <Logo />
-            <div className={styles.data}>Подписка активна до: {subscribeFinishDate}</div>
+            {subscribeFinishDate && <div className={styles.data}>Подписка активна до: {subscribeFinishDate}</div>}
         </div>
     )
 }

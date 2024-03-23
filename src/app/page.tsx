@@ -7,6 +7,7 @@ import { SettingsMenu } from './components/widgets/SettingsMenu'
 
 
 export default function Home() {
+  console.log('home')
   return (
     <>
       <Header />
