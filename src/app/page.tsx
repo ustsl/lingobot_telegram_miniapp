@@ -4,10 +4,11 @@ import { BodyComponent } from '@/components/shared/Body'
 import { Footer } from '@/components/widgets/Footer'
 import { BookLink } from './components/widgets/BookLink'
 import { SettingsMenu } from './components/widgets/SettingsMenu'
+import { ResetProgressComponent } from '@/components/entities/ResetProgressComponent'
 
 
 export default function Home() {
-  console.log('home')
+
   return (
     <>
       <Header />
@@ -16,6 +17,7 @@ export default function Home() {
         <BookLink />
         <SettingsMenu />
       </BodyComponent>
+      <ResetProgressComponent />
       <Footer />
     </>
   )

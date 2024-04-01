@@ -1,13 +1,20 @@
 import { create } from 'zustand'
 
 
+export const useModalStore = create((set) => ({
+    modalIsOpen: false,
+    setOpenModal: () => set({ modalIsOpen: true }),
+    setCloseModal: () => set({ modalIsOpen: false }),
+}))
+
+
 export const useBaseStore = create((set) => ({
     tg: null,
     userId: null,
     setTg: (tg: any) => set(() => ({
         tg: tg,
         userId: tg?.initDataUnsafe?.user?.id
-        // userId: 348958472
+        // userId: 123123123
     })),
     removeTg: () => set({ tg: null }),
     removeUserId: () => set({ userId: null }),

@@ -1,0 +1,53 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modalWindow {
+    padding: 10px;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    max-width: 400px;
+    min-width: 350px;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
+    position: absolute;
+    z-index: 999;
+}
+
+.modalBody {
+    padding: 20px;
+    gap: 20px;
+    display: grid;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.width100 {
+    width: 100%;
+    max-width: 800px;
+}
+
+.closeButton {
+    position: absolute;
+    top: -50px;
+    right: 0px;
+    background: transparent;
+    border: none;
+    font-size: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    line-height: 1;
+    color: white
+}

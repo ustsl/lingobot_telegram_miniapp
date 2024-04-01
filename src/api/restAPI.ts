@@ -18,7 +18,7 @@ export async function getBaseQuery(method: string) {
   const url = API_DOMAIN + API_VERSION + method;
 
   const res = await fetch(url, { headers: HEADERS, next: { revalidate: REVALIDATE_PARAM } })
-  console.log(res)
+
   if (!res.ok) {
     return notFound()
   }

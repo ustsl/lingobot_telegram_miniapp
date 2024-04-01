@@ -20,9 +20,7 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const setUserCategories = useUserStore((state: any) => state.setUserCategories)
 
     useEffect(() => {
-        console.log('uf')
         if (userId) {
-            console.log('ui')
             handleGetUserData(userId);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,15 +35,14 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
         }
 
         postResponse(data).then((result: any) => {
-            console.log(data)
-            console.log(result)
+
             if (result) {
                 const paymentFunction = result?.user_data?.payment_function
                 const trainType = result?.user_data?.train_type
                 const newWordLimit = result?.user_data?.new_word_limit
                 const repeatWordLimit = result?.user_data?.repeat_word_limit
                 const userCategories = result?.user_categories
-                console.log(paymentFunction)
+
                 if (result?.user_data) {
                     setIsLoad(true)
                 }

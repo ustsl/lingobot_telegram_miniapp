@@ -1,13 +1,12 @@
 'use client'
 
 import { postResponse } from '@/api/restAPI';
-import styles from './categoryList.module.css';
-
 import { ButtonComponent } from "@/app/train/components/shared/ButtonComponent";
 import { GridBlock } from "@/components/shared/GridBlock"
 import { useBaseStore, useUserStore } from '@/store/useStore';
 import { useState } from 'react'
 import { NotificationComponent } from '@/components/features/NotificationMessage';
+import { CheckBoxComponent } from '@/components/shared/CheckBoxComponent';
 
 interface ICategory {
     id: number;
@@ -42,7 +41,6 @@ export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
             }
         };
         postResponse(data).then(() => {
-            console.log(data)
             setNotificationMessage('Изменения успешно сохранены')
         });
         setIsChange(false);
@@ -53,16 +51,13 @@ export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
             <GridBlock gridSize='M'>
                 <GridBlock gridSize="XS">
                     {categories.map((item) => (
-                        <label className={styles.label} key={item.id}>
-                            <input
-                                type="checkbox"
-                                value={item.id}
-                                checked={choiceCategories.includes(item.id)}
-                                onChange={() => handleSetCategories(item.id)}
-                                className={styles.input}
-                            />
-                            {item.title}
-                        </label>
+                        <CheckBoxComponent
+                            key={item.id}
+                            value={item.id}
+                            checked={choiceCategories.includes(item.id)}
+                            onChange={() => handleSetCategories(item.id)}
+                            title={item.title} />
+
                     ))}
                 </GridBlock>
                 {isChange && <ButtonComponent text="Сохранить" onClick={handleSave} />}

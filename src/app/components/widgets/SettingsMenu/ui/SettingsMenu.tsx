@@ -1,13 +1,12 @@
 'use client';
 
-import styles from './settingsMenu.module.css';
 
 import { PointName } from '@/components/shared/PointName'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsProgress, faCheck, faWallet } from '@fortawesome/free-solid-svg-icons'
 import { IconMenuButtonPoint, IconMenuPoint } from '@/components/shared/IconMenuPoint/ui/IconMenuPoint';
 import { GridBlock } from '@/components/shared/GridBlock';
-import { useBaseStore, useUserStore } from '@/store/useStore';
+import { useBaseStore, useModalStore, useUserStore } from '@/store/useStore';
 import { postResponse } from '@/api/restAPI';
 import { useTelegram } from '@/hooks/useTelegram';
 
@@ -19,6 +18,7 @@ export const SettingsMenu = () => {
     const userId = useBaseStore((state: any) => state.userId)
     const trainType = useUserStore((state: any) => state.trainType)
     const setTrainType = useUserStore((state: any) => state.setTrainType)
+    const { setOpenModal } = useModalStore((state: any) => state)
 
     function handleSave() {
         const newTrainType = trainType == 'TR' ? 'RU' : 'TR'
@@ -64,7 +64,13 @@ export const SettingsMenu = () => {
                 icon={<FontAwesomeIcon icon={faCheck} />}
                 onClick={handleSave}
                 fontSize='S'
+            />
 
+            <IconMenuButtonPoint size="S"
+                text={"Сбросить прогресс тренировок"}
+                icon={<FontAwesomeIcon icon={faCheck} />}
+                onClick={setOpenModal}
+                fontSize='S'
             />
 
 
