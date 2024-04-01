@@ -40,7 +40,7 @@ export function useTelegram() {
 
             } else {
                 console.log('Telegram WebApp is undefined, retrying...');
-                setTimeout(initTg, 500);
+                setTimeout(initTg, 100);
             }
         }
 
