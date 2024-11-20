@@ -65,13 +65,13 @@ export const SettingsMenu = () => {
             <GridBlock gridSize="S">
                 <PointName text={'Управление'} />
                 <GridBlock gridSize="XS">
-                    <Link href="/limits" target="new">
+                    <Link href="/limits">
                         Изменить суточный лимит слов
                     </Link>
-                    <Link href="/categories" target="new">
+                    <Link href="/categories">
                         Настроить категории слов на изучение
                     </Link>
-                    <Link href='https://t.me/ustsl'>Техническая поддержка</Link>
+                    <Link href='https://t.me/ustsl' target="new">Техническая поддержка</Link>
                 </GridBlock>
             </GridBlock>
             <button onClick={setOpenModal} className={styles.danger}><DeleteIcon /><span>Сбросить прогресс тренировок</span></button>
