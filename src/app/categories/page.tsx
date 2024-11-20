@@ -4,6 +4,7 @@ import { BodyComponent } from "@/components/shared/Body"
 import { Header } from "@/components/widgets/Header"
 import { BackHomeLink } from "@/components/features/BackHomeLink"
 import { GridBlock } from "@/components/shared/GridBlock"
+import { TitleBlockComponent } from "@/components/shared/TitleBlockComponent"
 
 export default async function SettingsPage() {
 
@@ -13,7 +14,7 @@ export default async function SettingsPage() {
         <>
             <Header />
             <BodyComponent>
-                <h1>Выберите категории</h1>
+                <TitleBlockComponent tag="h1" size="M" text="Выберите категорию" />
                 <GridBlock gridSize="L">
                     <CategoryList categories={res.results} />
                     <BackHomeLink />

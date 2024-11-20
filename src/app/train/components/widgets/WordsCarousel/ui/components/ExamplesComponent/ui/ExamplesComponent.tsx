@@ -1,37 +1,42 @@
+import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import styles from './exampleComponent.module.css';
 
-import { ISentence } from "../../../wordsCarousel.props"
+import { ISentence } from "../../../wordsCarousel.props";
 import { PointName } from '@/components/shared/PointName';
-import { SimpleSlider } from '@/components/features/SimpleSlider';
 
 export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
-    const shuffleArray = (array: ISentence[]) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    };
+    const [activeId, setActiveId] = useState(examples[0]?.pk || null);
 
-    const shuffledExamples = shuffleArray([...examples]).slice(0, 3);
+    const handleSlideChange = (swiper: any) => {
+        const currentSlideIndex = swiper.realIndex; // Индекс с учетом `loop`
+        setActiveId(examples[currentSlideIndex]?.pk || null);
+    };
 
     return (
         <div className={styles.examples}>
             <PointName text="Примеры" />
             <div className={styles.list}>
-                <SimpleSlider>
-                    {shuffledExamples.map(item => {
-                        return (<div key={item.pk} className={styles.example}>
-                            <p className={styles.tr}>
-                                {item.sentence}
-                            </p>
-                            <p className={styles.ru}>
-                                {item.ru}
-                            </p>
-
-                        </div>)
-                    })}
-                </SimpleSlider>
+                <Swiper
+                    modules={[Pagination]}
+                    pagination={{ clickable: true }}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    className={styles.swiper}
+                    loop={true}
+                    onSlideChange={handleSlideChange}
+                >
+                    {examples.map((item) => (
+                        <SwiperSlide key={item.pk} className={styles.example}>
+                            <p className={styles.tr}>{item.sentence}</p>
+                            <p className={styles.ru}>{item.ru}</p>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
         </div>
     );

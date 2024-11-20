@@ -7,16 +7,17 @@ import { faPlus, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { PointName } from '@/components/shared/PointName';
 
 import { IconMenuPoint } from '@/components/shared/IconMenuPoint';
+import { RepeatIcon, StudyIcon } from '@/icons';
 
 
 export const MainMenu = () => {
 
     return (
-        <GridBlock gridSize='XS'>
+        <GridBlock gridSize='S'>
             <PointName text={'Тренировка слов'} />
-            <GridBlock gridSize='S'>
-                <IconMenuPoint text="Учить новые слова" link="/train/new" icon={<FontAwesomeIcon icon={faPlus} />} size='L' />
-                <IconMenuPoint text="Повторить добавленные" link="/train/repeat" icon={<FontAwesomeIcon icon={faRepeat} />} size='L' />
+            <GridBlock gridSize='XS'>
+                <IconMenuPoint text="Учить новые слова" link="/train/new" icon={<StudyIcon />} size='L' />
+                <IconMenuPoint text="Повторить добавленные" link="/train/repeat" icon={<RepeatIcon />} size='L' />
             </GridBlock>
         </GridBlock>
 

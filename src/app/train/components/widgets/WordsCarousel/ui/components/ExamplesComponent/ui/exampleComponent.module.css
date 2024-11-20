@@ -19,8 +19,9 @@
 }
 
 .example {
-    display: grid;
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     color: var(--tg-theme-text-color);
 }
 
@@ -31,4 +32,21 @@
 .ru,
 .tr {
     font-size: 13px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px;
+    background-color: var(--tg-theme-bg-color);
+    border-radius: var(--border-radius);
+    color: var(--tg-theme-text-color);
 }

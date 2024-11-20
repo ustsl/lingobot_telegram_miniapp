@@ -1,0 +1,1 @@
+export { TitleBlockComponent } from "./ui/TitleBlockComponent";

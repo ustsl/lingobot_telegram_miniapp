@@ -1,14 +1,15 @@
 .iconLink {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: flex-start;
+    cursor: pointer;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 100%;
     text-decoration: none;
     color: var(--tg-theme-button-text-color) !important;
     background-color: var(--tg-theme-button-color);
-    padding: 10px 20px;
+    padding: 20px 30px;
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all .4s ease;
@@ -22,17 +23,22 @@
 }
 
 .icon {
-    height: 18px;
-    width: 18px;
+    height: 30px;
+    width: 30px;
     color: var(--tg-theme-button-text-color);
 }
+
+.icon svg {
+    fill: var(--tg-theme-button-text-color);
+}
+
 
 .iconLink span {
     color: var(--tg-theme-button-text-color);
 }
 
 .sizeL {
-    padding: 20px;
+    padding: 20px 30px;
 }
 
 .fontSizeS {

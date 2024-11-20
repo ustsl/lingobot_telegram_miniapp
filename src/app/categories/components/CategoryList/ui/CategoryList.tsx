@@ -15,19 +15,20 @@ interface ICategory {
 
 export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
     const userId = useBaseStore((state: any) => state.userId);
-    const userCategories = useUserStore((state: any) => state.userCategories);
+    const { userCategories, setUserCategories } = useUserStore((state: any) => state);
     const [isChange, setIsChange] = useState(false);
-    const [choiceCategories, setChoiceCategories] = useState<number[]>(userCategories);
+
     const [notificationMessage, setNotificationMessage] = useState('');
 
 
 
     function handleSetCategories(item: number) {
+
         setIsChange(true);
-        if (choiceCategories.includes(item)) {
-            setChoiceCategories(prevState => prevState.filter(curr => curr !== item));
+        if (userCategories.includes(item)) {
+            setUserCategories(userCategories.filter((curr: number) => curr !== item));
         } else {
-            setChoiceCategories(prevState => [...prevState, item]);
+            setUserCategories([...userCategories, item]);
         }
     }
 
@@ -37,9 +38,10 @@ export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
             method: '/customer/set_word_categories/',
             data: {
                 user: userId,
-                word_categories: choiceCategories.join(',')
+                word_categories: userCategories.join(',')
             }
         };
+
         postResponse(data).then(() => {
             setNotificationMessage('Изменения успешно сохранены')
         });
@@ -54,7 +56,7 @@ export const CategoryList = ({ categories }: { categories: ICategory[] }) => {
                         <CheckBoxComponent
                             key={item.id}
                             value={item.id}
-                            checked={choiceCategories.includes(item.id)}
+                            checked={userCategories && userCategories.includes(item.id)}
                             onChange={() => handleSetCategories(item.id)}
                             title={item.title} />
 
