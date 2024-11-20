@@ -55,7 +55,7 @@ export const NumberForm = () => {
     };
 
     return (
-        <GridBlock gridSize='M'>
+        <GridBlock gridSize='S'>
 
             <InputElement
                 label='Установите лимит новых слов в день'
