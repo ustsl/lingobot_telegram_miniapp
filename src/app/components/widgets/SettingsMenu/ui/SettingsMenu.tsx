@@ -31,9 +31,6 @@ export const SettingsMenu = () => {
         setTrainType(newTrainType);
     }
 
-    function paymentTgHandler() {
-        tg.sendData('payment');
-    }
 
     return (
         <GridBlock gridSize='M'>

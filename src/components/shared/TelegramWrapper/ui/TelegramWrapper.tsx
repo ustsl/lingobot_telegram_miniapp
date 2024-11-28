@@ -20,11 +20,27 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const setUserCategories = useUserStore((state: any) => state.setUserCategories)
 
     useEffect(() => {
+        console.log(userId)
         if (userId) {
-            handleGetUserData(userId);
+            if (handleGetUserData(userId)) {
+                handlePostStatData(userId)
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
+
+
+    function handlePostStatData(userId: number) {
+        const stat_data = {
+            method: '/analytics/',
+            data: {
+                identity: userId,
+                command: "load_mini_app",
+            },
+        };
+        postResponse(stat_data);
+    }
+
 
     function handleGetUserData(userId: number) {
         const data = {
@@ -35,7 +51,6 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
         }
 
         postResponse(data).then((result: any) => {
-
             if (result) {
                 const paymentFunction = result?.user_data?.payment_function
                 const trainType = result?.user_data?.train_type
@@ -61,15 +76,19 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
                 if (userCategories) {
                     setUserCategories(userCategories)
                 }
-            } else {
-                console.log('bad')
+
             }
         })
+        return true
     }
+
 
     return (
         <>
-            {isLoad && children}
+            {tg && isLoad && children}
         </>
     )
 }
+
+
+
