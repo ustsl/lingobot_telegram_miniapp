@@ -1,6 +1,6 @@
 .pointName {
     color: var(--tg-theme-hint-color);
-    font-size: 14px;
+    font-size: var(--xs-font-size);
     font-weight: 400;
     width: fit-content;
 }

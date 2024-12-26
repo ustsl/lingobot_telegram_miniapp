@@ -1,6 +1,6 @@
-.iconLink {
+.button {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: flex-start;
     cursor: pointer;
@@ -9,7 +9,7 @@
     text-decoration: none;
     color: var(--tg-theme-button-text-color) !important;
     background-color: var(--tg-theme-button-color);
-    padding: 15px 20px;
+    padding: 10px 20px;
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all .4s ease;
@@ -18,31 +18,10 @@
     text-align: left;
 }
 
-.iconLink:hover {
+.button:hover {
     opacity: 0.8;
 }
 
-.icon {
-    height: 22px;
-    width: 22px;
-    color: var(--tg-theme-button-text-color);
-    fill: var(--tg-theme-button-text-color);
-}
-
-.icon svg {
-    fill: var(--tg-theme-button-text-color);
-    color: var(--tg-theme-button-text-color);
-}
-
-
-.iconLink span {
-    color: var(--tg-theme-button-text-color);
-}
-
-.sizeL {
-    padding: 20px 30px;
-}
-
-.fontSizeS {
-    font-size: 14px !important;
+.button span {
+    font-size: var(--s-font-size);
 }

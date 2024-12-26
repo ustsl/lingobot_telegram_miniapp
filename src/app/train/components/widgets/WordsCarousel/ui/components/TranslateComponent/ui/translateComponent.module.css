@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
-    font-size: 20px;
+    font-size: 17px;
     color: var(--tg-theme-section-header-text-color);
     align-items: center;
 }

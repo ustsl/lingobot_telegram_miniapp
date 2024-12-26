@@ -12,6 +12,6 @@
     border: 1px solid var(--tg-theme-hint-color);
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: var(--xs-font-size);
     padding: 5px 10px;
 }

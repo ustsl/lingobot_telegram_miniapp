@@ -16,6 +16,17 @@ import { BackHomeLink } from '@/components/features/BackHomeLink';
 import { sendProgress } from '@/functions/sendProgress';
 
 
+function shuffleArray(array: any[]) {
+    const shuffled = [...array]; // Создаем копию массива, чтобы не изменять оригинал
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Случайный индекс от 0 до i
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Меняем элементы местами
+    }
+    return shuffled;
+}
+
+
+
 export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 'repeat' }) => {
     const [isLoad, setIsLoad] = useState(false);
     const [step, setStep] = useState(0);
@@ -105,7 +116,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         postResponse(data).then((result: any) => {
             if (result) {
                 if (result?.word_list && result?.status) {
-                    setWordList(result.word_list)
+                    setWordList(shuffleArray(result.word_list));
                     setLimit(result.limit)
                     setIsLoad(true);
                     if ((result.word_list).length > 0) {

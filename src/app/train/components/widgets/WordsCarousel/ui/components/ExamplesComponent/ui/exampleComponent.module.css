@@ -15,7 +15,7 @@
     margin: 0px -10px;
     overflow: hidden;
     overflow-y: scroll;
-    height: 200px;
+    height: 220px;
 }
 
 .example {
@@ -49,4 +49,13 @@
     background-color: var(--tg-theme-bg-color);
     border-radius: var(--border-radius);
     color: var(--tg-theme-text-color);
+}
+
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    height: 80%;
 }

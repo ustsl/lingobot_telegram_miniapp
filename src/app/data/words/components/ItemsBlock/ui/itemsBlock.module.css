@@ -1,0 +1,55 @@
+.items {
+    display: grid;
+    gap: 20px;
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.item {
+    display: grid;
+    gap: 7px;
+    padding: 0px 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
+    text-decoration: none;
+    transition: all .2s ease;
+}
+
+.item span {
+    font-size: var(--s-font-size);
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item .sentence {
+    color: var(--tg-theme-section-header-text-color);
+    font-weight: var(--l-font-weight);
+    transition: all .2s ease;
+    font-size: var(--s-font-size);
+}
+
+.item .ru {
+    color: var(--tg-theme-text-color);
+
+}
+
+.item .stat {
+    font-size: var(--xs-font-size);
+    color: var(--tg-theme-hint-color);
+}
+
+.delete {
+    cursor: pointer;
+}
+
+.delete svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--danger-color)
+}

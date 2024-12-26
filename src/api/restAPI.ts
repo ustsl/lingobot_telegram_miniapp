@@ -55,7 +55,7 @@ export async function postResponse({ method, data }: { method: string, data: any
   if (!res.ok) {
     const errorBody = await res.json();
     console.error('API error response:', errorBody);
-    throw new Error(`Failed to post data: ${errorBody.detail || 'Unknown error'}`);
+    return false//throw new Error(`Failed to post data: ${errorBody.detail || 'Unknown error'}`);
   }
 
 

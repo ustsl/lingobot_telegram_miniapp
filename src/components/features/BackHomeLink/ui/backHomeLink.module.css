@@ -1,9 +1,17 @@
 .link {
     display: flex;
-    gap: 1px;
     max-width: fit-content;
-    color: var(--tg-theme-link-color);
     text-decoration: none;
     text-align: left;
     align-items: center;
+    font-size: var(--s-font-size);
+}
+
+.link span {
+    color: var(--tg-theme-hint-color);
+}
+
+.link svg {
+    color: var(--tg-theme-hint-color);
+    fill: var(--tg-theme-hint-color);
 }

@@ -1,0 +1,4 @@
+.hint {
+    font-size: var(--xs-font-size);
+    color: var(--tg-theme-hint-color);
+}

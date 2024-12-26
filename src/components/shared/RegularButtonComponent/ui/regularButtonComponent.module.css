@@ -1,0 +1,14 @@
+.button {
+    border: 1px solid var(--tg-theme-hint-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    font-size: var(--xs-font-size);
+    background-color: var(--tg-theme-secondary-bg-color);
+    color: var(--tg-theme-text-color);
+    padding: 4px 7px;
+    max-width: fit-content;
+    font-weight: var(--m-font-weight);
+
+}
