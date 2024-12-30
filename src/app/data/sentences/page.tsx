@@ -49,8 +49,6 @@ export default function LimitPage() {
 
     function handleLoad() {
 
-
-
         const data = {
             method: `/sentence_actions/get_user_list/${page > 0 ? `?page=${page}` : ``}`,
             data: {

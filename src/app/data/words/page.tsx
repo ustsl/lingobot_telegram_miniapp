@@ -49,8 +49,6 @@ export default function LimitPage() {
 
     function handleLoad() {
 
-        setIsLoad(false)
-
         const data = {
             method: `/word_actions/get_user_list/${page > 0 ? `?page=${page}` : ``}`,
             data: {
@@ -71,7 +69,7 @@ export default function LimitPage() {
     }
 
     useEffect(() => {
-
+        setIsLoad(false)
         if (userId) {
             handleLoad()
         }
@@ -90,7 +88,7 @@ export default function LimitPage() {
                 <GridBlock gridSize="L">
                     <ItemsBlock results={results} onDelete={handleDelete} />
                     {isLoad && results.length === 0 && <p>Добавьте первые слова для запоминания с помощью тренажера</p>}
-                    <Pagination nextPage={nextPage} page={page} setPage={setPage} />
+                    {isLoad && <Pagination nextPage={nextPage} page={page} setPage={setPage} />}
                     <BackHomeLink />
                 </GridBlock>
             </BodyComponent>
