@@ -45,12 +45,11 @@ export default function LimitPage() {
                 );
             }
         });
-
     }
 
     function handleLoad() {
 
-        setIsLoad(false)
+
 
         const data = {
             method: `/sentence_actions/get_user_list/${page > 0 ? `?page=${page}` : ``}`,
@@ -71,8 +70,9 @@ export default function LimitPage() {
             setIsLoad(true));
     }
 
-    useEffect(() => {
 
+    useEffect(() => {
+        setIsLoad(false)
         if (userId) {
             handleLoad()
         }
@@ -90,8 +90,8 @@ export default function LimitPage() {
                 </FlexBlock>
                 <GridBlock gridSize="L">
                     <ItemsBlock results={results} onDelete={handleDelete} />
-                    {isLoad && results.length === 0 && <p>Добавьте первые предложения для запоминания из переводчика в чате, или из тренажера</p>}
-                    <Pagination nextPage={nextPage} page={page} setPage={setPage} />
+                    {isLoad && results && results.length === 0 && <p>Добавьте первые предложения для запоминания из переводчика в чате, или из тренажера</p>}
+                    {isLoad && <Pagination nextPage={nextPage} page={page} setPage={setPage} />}
                     <BackHomeLink />
                 </GridBlock>
             </BodyComponent>

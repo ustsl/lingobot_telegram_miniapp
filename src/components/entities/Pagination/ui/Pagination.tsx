@@ -7,13 +7,12 @@ export const Pagination = ({ page, setPage, nextPage }:
     { nextPage: boolean, page: number, setPage: (data: number) => void }) => {
 
     function handlePagination(change: 'next' | 'prev') {
-        console.log(12345)
         switch (change) {
             case "next":
-                setPage(page += 1)
+                setPage(page + 1)
                 break;
             case "prev":
-                setPage(page -= 1)
+                setPage(page - 1)
                 break;
             default:
                 console.log("Error");

@@ -9,11 +9,8 @@ export const BookLink = () => {
         <GridBlock gridSize='S'>
             <PointName text={'Грамматика'} />
             <GridBlock gridSize='XS'>
-                <Link href="https://lingobot.ru/book/bazovaja-chast" target='new'>Базовая часть</Link>
-                <Link href="https://lingobot.ru/book/affiksy-izafety-i-posleslogi" target='new'>Аффиксы, изафеты и послеслоги</Link>
-                <Link href="https://lingobot.ru/book/vremena" target='new'>Времена</Link>
-                <Link href="https://lingobot.ru/book/deeprichastiya" target='new'>Деепричастия</Link>
-                <Link href="https://lingobot.ru/book/sintaksicheskie-konstrukcii" target='new'>Синтаксические конструкции</Link>
+                <Link href="https://lingobot.ru/book/" target='new'>Открыть учебник на сайте</Link>
+
             </GridBlock>
         </GridBlock>
     )
