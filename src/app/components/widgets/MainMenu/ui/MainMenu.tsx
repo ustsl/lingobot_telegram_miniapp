@@ -13,8 +13,8 @@ export const MainMenu = () => {
         <GridBlock gridSize='S'>
             <PointName text={'Тренировка слов'} />
             <GridBlock gridSize='XS'>
-                <IconMenuPoint text="Учить новые слова" link="/train/new" icon={<ExploreIcon />} size='L' />
-                <IconMenuPoint text="Повторить добавленные" link="/train/repeat" icon={<RepeatIcon />} size='L' />
+                <IconMenuPoint text="Добавить новые слова" link="/train/new" icon={<ExploreIcon />} size='L' />
+                <IconMenuPoint text="Тренировать добавленные" link="/train/repeat" icon={<RepeatIcon />} size='L' />
             </GridBlock>
         </GridBlock>
 

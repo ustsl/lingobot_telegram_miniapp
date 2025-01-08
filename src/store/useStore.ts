@@ -14,6 +14,7 @@ export const useBaseStore = create((set) => ({
     setTg: (tg: any) => set(() => ({
         tg: tg,
         userId: tg?.initDataUnsafe?.user?.id
+        //userId: 315854463
         //userId: 123
     })),
     removeTg: () => set({ tg: null }),

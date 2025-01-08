@@ -4,7 +4,7 @@
     text-decoration: none;
     text-align: left;
     align-items: center;
-    font-size: var(--s-font-size);
+    font-size: var(--xs-font-size);
 }
 
 .link span {

@@ -1,0 +1,30 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 350px;
+    gap: 1rem;
+}
+
+.wordsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.word {
+    background-color: var(--tg-theme-button-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}

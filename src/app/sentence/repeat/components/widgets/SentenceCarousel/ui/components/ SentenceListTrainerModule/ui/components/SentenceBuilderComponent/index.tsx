@@ -1,0 +1,1 @@
+export { SentenceBuilderComponent } from "./ui/SentenceBuilderComponent";

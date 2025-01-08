@@ -1,0 +1,1 @@
+export { SentenceListTrainerModule } from "./ui/ SentenceListTrainerModule";

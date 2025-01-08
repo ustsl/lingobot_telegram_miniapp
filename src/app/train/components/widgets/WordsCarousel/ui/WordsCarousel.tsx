@@ -7,23 +7,14 @@ import { useBaseStore, useUserStore } from "@/store/useStore";
 import { useState, useEffect } from 'react'
 import { IWordEntry } from "./wordsCarousel.props";
 
-import { WordCounter } from "./components/WordCounter";
 
 import { WordComponent } from './components/WordComponent';
 import { ButtonComponent } from '../../../shared/ButtonComponent';
 import { ErrorComponent, SuccessComponent } from './components/StatusComponent';
 import { BackHomeLink } from '@/components/features/BackHomeLink';
 import { sendProgress } from '@/functions/sendProgress';
-
-
-function shuffleArray(array: any[]) {
-    const shuffled = [...array]; // Создаем копию массива, чтобы не изменять оригинал
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1)); // Случайный индекс от 0 до i
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // Меняем элементы местами
-    }
-    return shuffled;
-}
+import { HintComponent } from '@/components/shared/HintComponent';
+import { shuffleArray } from '@/functions/shuffleArray';
 
 
 
@@ -152,8 +143,9 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                 <BackHomeLink />
 
                 {phase == 'new' && step < wordList.length ?
-                    <WordCounter counter={`Добавлено: ${step} из ${wordList.length} слов`} /> :
-                    <WordCounter counter={`Осталось: ${wordList.length}`} />
+                    <HintComponent text={`Добавлено: ${step} из ${wordList.length} слов`} />
+                    :
+                    <HintComponent text={`Осталось: ${wordList.length}`} />
                 }
             </div>
 
