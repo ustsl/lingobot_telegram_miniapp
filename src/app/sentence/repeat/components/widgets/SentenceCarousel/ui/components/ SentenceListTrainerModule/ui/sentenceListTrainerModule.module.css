@@ -1,6 +1,8 @@
 .container {
     /* контейнер для позиций карточки */
     position: relative;
+    overflow: hidden;
+    max-height: 100%;
 }
 
 /* --- когда элемент входит (mount) --- */
