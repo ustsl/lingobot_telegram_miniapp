@@ -60,6 +60,8 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
         // Пролистываем дальше только если есть куда
         if (currentIndex < data.length - 1) {
             setCurrentIndex(currentIndex + 1);
+        } else {
+            setCurrentIndex(0)
         }
         // Если элементов 1 или мы на последнем, 
         // всё равно повысится childKey и компонент перерисуется заново
