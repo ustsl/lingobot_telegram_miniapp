@@ -49,10 +49,12 @@ export const SentenceCarousel = () => {
                 if (!result || result?.error) {
                     setError(result.error)
                 }
-                if (result && result?.data && (result?.data).length > 0) {
+                else if (result && result?.data && (result?.data).length > 0) {
                     setDataList(shuffleArray(result.data as SentenceData[]))
                     setLimit((result.data).length)
 
+                } else {
+                    setError("Добавьте первые предложения через переводчик или тренажер слов.")
                 }
             }).then(() => {
                 setIsLoad(true)
