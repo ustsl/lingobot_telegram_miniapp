@@ -3,14 +3,6 @@
     bottom: 30px;
 }
 
-
-
-.flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end
-}
-
 .buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -21,18 +13,4 @@
     bottom: 20px;
     gap: 20px;
     justify-content: space-between;
-}
-
-
-.wrapper {
-    transition: all 0.2s ease;
-    position: absolute;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.fadeOut {
-    opacity: 0;
-    transform: translateX(-50%);
 }

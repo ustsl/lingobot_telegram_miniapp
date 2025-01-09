@@ -17,8 +17,7 @@ export const SuccessComponent = () => {
 export const ErrorComponent = ({ text }: { text: string }) => {
     return (
         <div className={styles.block}>
-
-            <div className={styles.text}>Отсутствуют слова</div>
+            <div className={styles.text}>Тренировка не может начаться</div>
             <p>{text}</p>
             <Link href="/" className={styles.link}>Вернуться в меню</Link>
         </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { postResponse } from '@/api/restAPI';
-import { ButtonComponent } from '@/app/train/components/shared/ButtonComponent';
+import { ButtonComponent } from '@/components/shared/ButtonComponent';
 import { NotificationComponent } from '@/components/features/NotificationMessage';
 import { GridBlock } from '@/components/shared/GridBlock';
 import { InputElement } from '@/components/shared/InputElement';

@@ -7,6 +7,7 @@
     padding: 20px 40px;
     border-radius: var(--border-radius);
     border: 1px solid var(--tg-theme-hint-color);
-    min-height: 420px;
+    min-height: 430px;
+    max-height: 430px;
     animation: fadeIn .3s ease-out;
 }

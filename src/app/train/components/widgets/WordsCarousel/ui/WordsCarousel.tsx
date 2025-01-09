@@ -9,18 +9,23 @@ import { IWordEntry } from "./wordsCarousel.props";
 
 
 import { WordComponent } from './components/WordComponent';
-import { ButtonComponent } from '../../../shared/ButtonComponent';
-import { ErrorComponent, SuccessComponent } from './components/StatusComponent';
+
 import { BackHomeLink } from '@/components/features/BackHomeLink';
 import { sendProgress } from '@/functions/sendProgress';
 import { HintComponent } from '@/components/shared/HintComponent';
 import { shuffleArray } from '@/functions/shuffleArray';
+import { ButtonComponent } from '@/components/shared/ButtonComponent';
+import { ErrorComponent, SuccessComponent } from '@/components/features/StatusComponent';
+import { CardAnimationWrapper } from '@/components/shared/CardAnimationWrapper';
+import { FlexBlock } from '@/components/shared/FlexBlock';
+
 
 
 
 export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 'repeat' }) => {
     const [isLoad, setIsLoad] = useState(false);
     const [step, setStep] = useState(0);
+    const [uniqStep, setUniqStep] = useState(0)
     const [isActive, setIsActive] = useState(false);
     const [limit, setLimit] = useState(0)
     const [wordList, setWordList] = useState<any[]>([])
@@ -38,14 +43,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
 
-    const handleActionWithFadeOut = (action: any) => {
-        setFadeOut(true);
 
-        setTimeout(() => {
-            action();
-
-        }, 200);
-    };
 
 
     useEffect(() => {
@@ -53,8 +51,10 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }, [wordList])
 
 
+
     function handleScrollWord(repeat: 0 | 1) {
         setStep(prevStep => prevStep + 1);
+        setUniqStep(prevStep => prevStep + 1);
 
         setWordList(prevWordList => {
             if (prevWordList.length > 0) {
@@ -68,6 +68,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     function handleReplaceWord() {
+        setUniqStep(prevStep => prevStep + 1);
 
         const updatedExceptions = new Set([...exceptions, wordList[0].pk]);
 
@@ -90,6 +91,8 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     function handleRememberWord(phase: 'new' | 'repeat') {
+        setUniqStep(prevStep => prevStep + 1);
+
         let repeat: 0 | 1 = 0
         if (phase == 'repeat') {
             repeat = 1
@@ -126,31 +129,30 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         translateKey = 'word'
     }
 
-    const generateWord = () => {
-        const item = wordList[0];
-        return (
-            <div className={`${styles.wrapper} ${fadeOut ? styles.fadeOut : ''}`}>
-                <WordComponent item={item} wordKey={wordKey} translateKey={translateKey} />
-            </div>
-        );
-    };
-
+    const item = wordList[0];
 
     return (
-        <div>
-            <div className={styles.flex}>
-
-                <BackHomeLink />
+        <>
+            <FlexBlock>
 
                 {phase == 'new' && step < wordList.length ?
                     <HintComponent text={`Добавлено: ${step} из ${wordList.length} слов`} />
                     :
                     <HintComponent text={`Осталось: ${wordList.length}`} />
                 }
-            </div>
+
+                <BackHomeLink />
 
 
-            {wordList.length > 0 && generateWord()}
+            </FlexBlock>
+
+
+            {wordList.length > 0
+                &&
+                <CardAnimationWrapper keyUniq={uniqStep}>
+                    <WordComponent item={item} wordKey={wordKey} translateKey={translateKey} />
+                </CardAnimationWrapper>
+            }
 
             {isLoad && wordList.length > 0 &&
                 <div className={styles.buttons}>
@@ -158,24 +160,23 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                         (
                             <>
                                 <ButtonComponent
-                                    onClick={() => handleActionWithFadeOut(() => handleScrollWord(0))}
+                                    onClick={() => handleScrollWord(0)}
                                     text="Изучить" color="success" />
                                 <ButtonComponent
-                                    onClick={() => handleActionWithFadeOut(() => handleReplaceWord())}
+                                    onClick={() => handleReplaceWord()}
                                     text="Уже знаю" />
                             </>
                         ) :
                         <>
 
                             <ButtonComponent
-                                onClick={() => handleActionWithFadeOut(() => handleRememberWord(phase))}
+                                onClick={() => handleRememberWord(phase)}
                                 text="Вспомнил" color="success" />
                             <ButtonComponent
-                                onClick={() => handleActionWithFadeOut(() => handleScrollWord(1))}
+                                onClick={() => handleScrollWord(1)}
                                 text="Не вспомнил" />
 
                         </>
-
                     }
                 </div>
             }
@@ -200,6 +201,6 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                     }
                 </>
             }
-        </div>
+        </>
     )
 }

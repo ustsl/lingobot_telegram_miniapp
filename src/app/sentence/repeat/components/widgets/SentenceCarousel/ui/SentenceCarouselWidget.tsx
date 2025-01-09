@@ -5,7 +5,7 @@ import { useBaseStore } from "@/store/useStore";
 
 import { useState, useEffect } from 'react'
 
-import { ErrorComponent, SuccessComponent } from './components/StatusComponent';
+
 import { BackHomeLink } from '@/components/features/BackHomeLink';
 import { GridBlock } from '@/components/shared/GridBlock';
 
@@ -13,7 +13,8 @@ import { HintComponent } from '@/components/shared/HintComponent';
 import { SentenceData } from './sentenceCarouselWidget.props';
 import { shuffleArray } from '@/functions/shuffleArray';
 import { FlexBlock } from "@/components/shared/FlexBlock";
-import { SentenceListTrainerModule } from "./components/ SentenceListTrainerModule";
+import { SentenceListTrainerModule } from "./components/SentenceListTrainerModule";
+import { ErrorComponent, SuccessComponent } from "@/components/features/StatusComponent";
 
 
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./sentenceBuilderComponent.module.css";
 import { HintComponent } from "@/components/shared/HintComponent";
 import { GridBlock } from "@/components/shared/GridBlock";
-import { ButtonComponent } from "@/app/train/components/shared/ButtonComponent";
-import { RegularButtonComponent } from "@/components/shared/RegularButtonComponent";
+import { ButtonComponent } from "@/components/shared/ButtonComponent";
+
 import { shuffleArray } from "@/functions/shuffleArray";
 
 interface Props {

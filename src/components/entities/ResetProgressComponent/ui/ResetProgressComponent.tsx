@@ -4,7 +4,7 @@
 
 
 import { postResponse } from "@/api/restAPI"
-import { ButtonComponent } from "@/app/train/components/shared/ButtonComponent"
+import { ButtonComponent } from "@/components/shared/ButtonComponent"
 import { NotificationComponent } from "@/components/features/NotificationMessage"
 import { CheckBoxComponent } from "@/components/shared/CheckBoxComponent"
 import { ModalComponent } from "@/components/shared/ModalComponent"

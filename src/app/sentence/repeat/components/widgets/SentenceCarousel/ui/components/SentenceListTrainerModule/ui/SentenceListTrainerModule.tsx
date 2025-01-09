@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { SentenceData } from "../../../sentenceCarouselWidget.props";
 import { CardWrapper } from "@/components/shared/CardWrapper";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styles from "./sentenceListTrainerModule.module.css";
+
 import { SentenceBuilderComponent } from "./components/SentenceBuilderComponent";
 import { GridBlock } from "@/components/shared/GridBlock";
 import { sendSentenceProgress } from "@/functions/sendProgress";
 import { useBaseStore } from "@/store/useStore";
+import { CardAnimationWrapper } from "@/components/shared/CardAnimationWrapper";
 
 interface Props {
     sentenceList: SentenceData[];
@@ -68,21 +68,12 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
     };
 
     const currentItem = data[currentIndex];
+    const keyUniq = currentItem.id
 
     return (
-        <TransitionGroup className={styles.container}>
+        <>
             {data.length > 0 && currentItem && (
-                <CSSTransition
-                    key={currentItem.id}
-                    timeout={300}
-                    classNames={{
-                        enter: styles.enter,
-                        enterActive: styles.enterActive,
-                        exit: styles.exit,
-                        exitActive: styles.exitActive,
-                    }}
-                    unmountOnExit
-                >
+                <CardAnimationWrapper keyUniq={keyUniq}>
                     <CardWrapper>
                         <GridBlock gridSize="M">
                             <p>{currentItem.ru}</p>
@@ -95,8 +86,9 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
                             />
                         </GridBlock>
                     </CardWrapper>
-                </CSSTransition>
+                </CardAnimationWrapper>
             )}
-        </TransitionGroup>
+        </>
+
     );
 };

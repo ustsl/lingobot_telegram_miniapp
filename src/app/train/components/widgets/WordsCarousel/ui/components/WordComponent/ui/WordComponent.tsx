@@ -8,21 +8,16 @@ import { TranslateComponent } from "../../TranslateComponent"
 import { ExamplesComponent } from "../../ExamplesComponent"
 import { RevealButtonComponent } from "../../RevealButtonComponent"
 import { useEffect, useState } from 'react';
+import { CardWrapper } from '@/components/shared/CardWrapper';
 
 
 
 export const WordComponent = ({ item, wordKey, translateKey }: { item: IWordEntry, wordKey: keyof IWordEntry, translateKey: keyof IWordEntry }) => {
     const [isReveal, setIsReveal] = useState(false);
-    const [animationKey, setAnimationKey] = useState(false);
-
-    useEffect(() => {
-        setIsReveal(false);
-        setAnimationKey(prevKey => !prevKey);
-    }, [item]);
 
     return (
 
-        <div key={`${item.pk}-${animationKey}`} className={styles.block}>
+        <CardWrapper>
             <GridBlock gridSize='XS'>
                 <WordNameComponent word={item[wordKey] as string} />
                 <AudioComponent soundPath={item.sound} />
@@ -36,6 +31,6 @@ export const WordComponent = ({ item, wordKey, translateKey }: { item: IWordEntr
                 :
                 <RevealButtonComponent onClick={() => setIsReveal(true)} />
             }
-        </div>
+        </CardWrapper>
     )
 }

@@ -11,6 +11,7 @@
     transform: translate(-50%, -80%);
     min-width: 200px;
     border-radius: var(--border-radius);
+    z-index: 200;
 }
 
 .text {
