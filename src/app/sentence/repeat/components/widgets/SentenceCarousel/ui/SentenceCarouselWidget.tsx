@@ -17,7 +17,6 @@ import { SentenceListTrainerModule } from "./components/SentenceListTrainerModul
 import { ErrorComponent, SuccessComponent } from "@/components/features/StatusComponent";
 
 
-
 export const SentenceCarousel = () => {
 
     const [error, setError] = useState("")

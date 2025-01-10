@@ -68,7 +68,7 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
     };
 
     const currentItem = data[currentIndex];
-    const keyUniq = currentItem.id
+    const keyUniq = currentItem?.id
 
     return (
         <>
