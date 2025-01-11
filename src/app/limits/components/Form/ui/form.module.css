@@ -9,8 +9,14 @@
     font-weight: 500;
 }
 
-/* Для стилизации ползунка */
+/* Убираем стандартный вид ползунка во всех движках */
 .slider {
+    -webkit-appearance: none;
+    /* Chrome, Safari, Edge, Opera */
+    -moz-appearance: none;
+    /* Firefox */
+    appearance: none;
+    /* Подстраховка */
     width: 100%;
     height: 6px;
     outline: none;
@@ -21,19 +27,51 @@
     transition: background 0.3s;
 }
 
-/* Стили для "ползунка" (ползущей ручки) - псевдокласс WebKit */
+/* ===== WebKit/Blink (Chrome, Safari, Edge, Opera) ===== */
+
+/* Дорожка (track) */
+.slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    /* важно, чтобы не было дефолтных стилей */
+    height: 6px;
+    border-radius: 4px;
+    background: var(--tg-theme-hint-color);
+    cursor: pointer;
+}
+
+/* Ползунок (thumb) */
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
     background: var(--tg-theme-button-color);
-    /* Цвет ручки */
     cursor: pointer;
+    /* Чтобы центрировать «кружок» на дорожке: 
+       Задаём отступ сверху, равный половине(thumb) - половине(track). 
+       16/2 - 6/2 = 8 - 3 = 5px 
+       Но можно подобрать другой отступ, если нужно визуально отцентрировать точнее */
+    margin-top: -5px;
     transition: background 0.3s;
 }
 
-/* Аналогичные стили для Firefox */
+/* При нажатии/перетаскивании */
+.slider::-webkit-slider-thumb:active {
+    background: darken(var(--tg-theme-button-color), 10%);
+    /* условно, если использовать pre- или postcss */
+}
+
+/* ===== Firefox (Gecko) ===== */
+
+/* Дорожка (track) */
+.slider::-moz-range-track {
+    height: 6px;
+    border-radius: 4px;
+    background: var(--tg-theme-hint-color);
+    cursor: pointer;
+}
+
+/* Ползунок (thumb) */
 .slider::-moz-range-thumb {
     height: 16px;
     width: 16px;
@@ -41,4 +79,9 @@
     background: var(--tg-theme-button-color);
     cursor: pointer;
     transition: background 0.3s;
+}
+
+/* При нажатии/перетаскивании для Firefox */
+.slider::-moz-range-thumb:active {
+    background: darken(var(--tg-theme-button-color), 10%);
 }
