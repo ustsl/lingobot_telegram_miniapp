@@ -8,7 +8,6 @@ import { TitleBlockComponent } from "@/components/shared/TitleBlockComponent"
 
 export default async function SettingsPage() {
 
-    const res = await getBaseQuery('/word/get_word_categories')
 
     return (
         <>
@@ -16,7 +15,7 @@ export default async function SettingsPage() {
             <BodyComponent>
                 <TitleBlockComponent tag="h1" size="M" text="Выберите категорию" />
                 <GridBlock gridSize="L">
-                    <CategoryList categories={res.results} />
+                    <CategoryList />
                     <BackHomeLink />
                 </GridBlock>
             </BodyComponent>

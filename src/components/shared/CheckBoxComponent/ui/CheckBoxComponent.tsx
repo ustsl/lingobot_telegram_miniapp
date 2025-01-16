@@ -1,5 +1,7 @@
-export const CheckBoxComponent = ({ checked, title, value, onChange }:
-    { checked: boolean, title: string, value: string | number, onChange: () => void }) => {
+import styles from './checkboxComponent.module.css'
+
+export const CheckBoxComponent = ({ checked, title, subtitle, value, onChange }:
+    { checked: boolean, title: string, subtitle?: string, value: string | number, onChange: () => void }) => {
     return (
         <label>
             <input
@@ -8,7 +10,9 @@ export const CheckBoxComponent = ({ checked, title, value, onChange }:
                 checked={checked}
                 onChange={onChange}
             />
-            {title}
+            <span className={styles.title}>{title}</span>
+            {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
+
         </label>
     )
 }
