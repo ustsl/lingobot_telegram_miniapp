@@ -22,7 +22,6 @@ export const InputElement = ({ label, type, value, placeholder, weight, size, ma
     const finnalyStyle = clFunc({ firstStyle, weight, size })
     return (
         <div className={styles.inputElem}>
-            <label>{label}</label>
             <input
                 className={finnalyStyle}
                 placeholder={placeholder ? placeholder : label}

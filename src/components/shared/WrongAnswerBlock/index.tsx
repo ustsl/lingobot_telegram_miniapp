@@ -1,0 +1,1 @@
+export { WrongAnswerBlock } from "./ui/WrongAnswerBlock";

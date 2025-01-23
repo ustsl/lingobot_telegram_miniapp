@@ -28,11 +28,10 @@ export async function getBaseQuery(method: string) {
 
 
 
-export async function getResponse({ token, method }: IAPI) {
+export async function getResponse(method: string) {
   const url = API_DOMAIN + API_VERSION + method;
-  const headers = createHeaders(token)
   try {
-    const response = await axios.get(url, { headers });
+    const response = await axios.get(url, { headers: { ...HEADERS } });
     return response;
   } catch (error) {
     return raiseAxiosError(error)

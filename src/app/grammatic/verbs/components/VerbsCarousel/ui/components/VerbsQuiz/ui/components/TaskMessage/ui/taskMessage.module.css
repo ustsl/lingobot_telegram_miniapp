@@ -1,0 +1,23 @@
+.task {
+    display: grid;
+    gap: 10px;
+    background-color: var(--tg-theme-bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin: 0px -10px;
+    overflow: hidden;
+    height: fit-content;
+}
+
+.task h4 {
+    color: var(--tg-theme-hint-color);
+}
+
+
+
+.example {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: var(--tg-theme-text-color);
+}

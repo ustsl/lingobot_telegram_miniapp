@@ -6,7 +6,6 @@
 
 .inputElem input {
     width: 100%;
-    max-width: 630px;
 }
 
 .textareaElem {
@@ -31,6 +30,7 @@
     box-sizing: border-box;
     min-width: 300px;
     color: var(--tg-theme-text-color);
+    border-radius: 12px;
 }
 
 input[type="color"].field {

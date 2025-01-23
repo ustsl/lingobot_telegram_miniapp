@@ -7,7 +7,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface Props {
     children: React.ReactNode
-    keyUniq: number
+    keyUniq: number | string
 }
 
 export const CardAnimationWrapper: React.FC<Props> = ({

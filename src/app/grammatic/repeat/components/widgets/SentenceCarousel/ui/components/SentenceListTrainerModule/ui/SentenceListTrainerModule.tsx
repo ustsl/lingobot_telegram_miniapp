@@ -71,7 +71,7 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
     const keyUniq = currentItem?.id
 
     return (
-        <>
+        <div className={styles.block}>
             {data.length > 0 && currentItem && (
                 <CardAnimationWrapper keyUniq={keyUniq}>
                     <CardWrapper>
@@ -88,7 +88,7 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
                     </CardWrapper>
                 </CardAnimationWrapper>
             )}
-        </>
+        </div>
 
     );
 };
