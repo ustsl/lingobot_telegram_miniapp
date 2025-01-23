@@ -6,12 +6,13 @@ import { ButtonComponent } from "@/components/shared/ButtonComponent";
 import { InputElement } from "@/components/shared/InputElement";
 import { CardAnimationWrapper } from "@/components/shared/CardAnimationWrapper";
 import { CardWrapper } from "@/components/shared/CardWrapper";
-import { PersonKey, PolarityKey, TenseKey } from "./sentenceListTrainer.props";
+
 import { TaskMessage } from "./components/TaskMessage";
 import { TitleComponent } from "./components/TitleBlock";
 import { GridBlock } from "@/components/shared/GridBlock";
 import { getRandomPersonKey, getRandomPolarityKey, getRandomTenseKey } from "./functions";
 import { WrongAnswerBlock } from "@/components/shared/WrongAnswerBlock";
+import { PersonKey, PolarityKey, TenseKey } from './verbsQuiz.props';
 
 
 interface VerbsQuizProps {

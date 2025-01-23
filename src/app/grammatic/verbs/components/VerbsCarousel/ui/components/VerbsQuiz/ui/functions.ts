@@ -1,4 +1,5 @@
-import { PersonKey, PolarityKey, TenseKey } from "./sentenceListTrainer.props";
+import { PersonKey, PolarityKey, TenseKey } from "./verbsQuiz.props";
+
 
 // Функция для генерации рандомного времени
 export function getRandomTenseKey(): TenseKey {

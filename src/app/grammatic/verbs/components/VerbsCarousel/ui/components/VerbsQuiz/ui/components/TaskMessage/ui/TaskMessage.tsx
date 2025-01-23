@@ -1,6 +1,7 @@
 import styles from './taskMessage.module.css'
 import translate from './taskMessage.forms.json'
-import { PersonKey, PolarityKey, TenseKey } from "../../../sentenceListTrainer.props";
+import { PersonKey, PolarityKey, TenseKey } from '../../../verbsQuiz.props'
+
 
 
 interface ITaskMessage {
