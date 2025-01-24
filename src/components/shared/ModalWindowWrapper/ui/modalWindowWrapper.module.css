@@ -82,7 +82,7 @@
 
 @media (max-width: 480px) {
     .modalWindow {
-        min-width: 90%;
+        min-width: 80%;
         margin-top: 4rem;
     }
 }
