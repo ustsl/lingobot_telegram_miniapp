@@ -34,7 +34,6 @@
 }
 
 input[type="color"].field {
-
     min-height: 60px;
     max-width: 300px;
 }
@@ -58,6 +57,6 @@ input[type="color"].field {
 
 @media (max-width: 480px) {
     .field {
-        min-width: 280px;
+        min-width: 100%;
     }
 }
