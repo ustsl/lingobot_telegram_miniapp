@@ -1,3 +1,4 @@
+import { postResponse } from "@/api/restAPI";
 import { PersonKey, PolarityKey, TenseKey } from "./verbsQuiz.props";
 
 
@@ -28,3 +29,16 @@ export function getRandomPersonKey(): PersonKey {
     ];
     return persons[Math.floor(Math.random() * persons.length)];
 }
+
+
+export async function handleSaveStat(userId: number, estimate: 0 | 1) {
+    const data = {
+        method: '/grammatic_actions/statistic/',
+        data: {
+            user: userId,
+            estimate
+        }
+    };
+    return await postResponse(data);
+}
+

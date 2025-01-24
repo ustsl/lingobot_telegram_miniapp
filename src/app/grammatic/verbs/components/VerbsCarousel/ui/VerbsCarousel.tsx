@@ -1,3 +1,5 @@
+import styles from './verbsCarousel.module.css'
+
 import { getResponse, } from "@/api/restAPI"
 import { useState, useEffect } from "react"
 import { Verb, VerbsResponse } from "./verbsCarousel.props"
@@ -16,6 +18,7 @@ export const VerbsCarousel = () => {
     const [isFinish, setIsFinish] = useState(false)
     const [isLoad, setIsLoad] = useState(false);
     const [limit, setLimit] = useState(0)
+    const [percentExperience, setPercentExperience] = useState("")
 
     const userId = useBaseStore((state: any) => state.userId)
 
@@ -29,24 +32,40 @@ export const VerbsCarousel = () => {
 
     function handleSetVerbsData(userId: number) {
 
-        const method = `/grammatic_actions/verbs/?user=${userId}`;
+        const getWordsMethod = `/grammatic_actions/verbs/?user=${userId}`;
 
-        getResponse(method)
+        getResponse(getWordsMethod)
             .then((result: any) => {
                 if (!result || result?.error) {
                     setError(result.error)
                 }
                 else if (result && result?.data) {
-                    const responseResult = result.data as VerbsResponse
-                    setVerbsList(responseResult.verbs)
-                    setLimit((responseResult.verbs).length)
+
+                    const responseResult = result.data
                     console.log(responseResult)
+                    if (responseResult.error) {
+                        setError("Требуется активная подписка")
+                    } else {
+                        setVerbsList(responseResult.verbs as Verb[])
+                        setLimit((responseResult.verbs).length)
+                    }
                 } else {
                     setError("Неизвестная ошибка.")
                 }
             }).then(() => {
                 setIsLoad(true)
             })
+
+        const getStatMethod = `/grammatic_actions/statistic/?user=${userId}`;
+        getResponse(getStatMethod)
+            .then((result: any) => {
+                if (result && result?.data && result.status == 200) {
+                    const percentValue = result.data.average * 100
+                    result = percentValue.toFixed(1)
+                    setPercentExperience(result)
+                }
+            })
+
     }
 
 
@@ -63,6 +82,7 @@ export const VerbsCarousel = () => {
                 text={error} />
             }
 
+
             {
                 isFinish &&
                 <SuccessComponent />
@@ -70,8 +90,21 @@ export const VerbsCarousel = () => {
 
             {
                 isLoad && verbsList.length > 0 && !isFinish &&
-                <VerbsQuiz verbsList={verbsList} setIsFinish={setIsFinish} setLimit={setLimit} />
+                <VerbsQuiz
+                    verbsList={verbsList}
+                    setIsFinish={setIsFinish}
+                    setLimit={setLimit}
+                    userId={userId}
+                    setPercentExperience={setPercentExperience} />
             }
+
+            {isLoad && percentExperience && <GridBlock gridSize="S">
+                <div className={styles.padding}>
+                    <HintComponent
+                        text={`Процент правильных ответов за\u00A0последние\u00A050\u00A0решений: ${percentExperience}%`} />
+
+                </div>
+            </GridBlock>}
 
         </GridBlock>
     )

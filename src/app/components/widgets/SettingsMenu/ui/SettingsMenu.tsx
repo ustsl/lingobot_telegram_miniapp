@@ -11,8 +11,8 @@ import Link from 'next/link';
 import { DeleteIcon } from '@/icons';
 
 export const SettingsMenu = () => {
-    const { tg } = useTelegram();
 
+    useTelegram();
     const userId = useBaseStore((state: any) => state.userId);
     const trainType = useUserStore((state: any) => state.trainType);
     const setTrainType = useUserStore((state: any) => state.setTrainType);
@@ -71,7 +71,8 @@ export const SettingsMenu = () => {
                     <Link href='https://t.me/ustsl' target="new">Техническая поддержка</Link>
                 </GridBlock>
             </GridBlock>
-            <button onClick={setOpenModal} className={styles.danger}><DeleteIcon /><span>Сбросить прогресс тренировок</span></button>
+            <button onClick={setOpenModal} className={styles.danger}><DeleteIcon />
+                <span>Сбросить прогресс тренировок</span></button>
         </GridBlock>
     );
 };

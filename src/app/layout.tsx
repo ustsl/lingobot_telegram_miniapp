@@ -4,6 +4,7 @@ import { Manrope } from 'next/font/google'
 import './globals.css'
 import { ScriptsBlock } from '@/components/shared/ScriptComponent/ui/ScriptComponent'
 import { TelegramWrapper } from '@/components/shared/TelegramWrapper'
+import { ModalWindowWrapper } from '@/components/shared/ModalWindowWrapper'
 
 
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <TelegramWrapper>
           {children}
         </TelegramWrapper>
+        <ModalWindowWrapper />
       </body>
     </html >
   )

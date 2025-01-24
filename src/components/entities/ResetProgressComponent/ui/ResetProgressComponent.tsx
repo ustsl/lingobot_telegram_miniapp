@@ -8,7 +8,7 @@ import { ButtonComponent } from "@/components/shared/ButtonComponent"
 import { NotificationComponent } from "@/components/features/NotificationMessage"
 import { CheckBoxComponent } from "@/components/shared/CheckBoxComponent"
 import { ModalComponent } from "@/components/shared/ModalComponent"
-import { useBaseStore, useModalStore, useUserStore } from "@/store/useStore"
+import { useBaseStore, useModalStore } from "@/store/useStore"
 import { useEffect, useState } from "react"
 
 
@@ -19,7 +19,6 @@ export const ResetProgressComponent = () => {
 
     const { modalIsOpen, setCloseModal } = useModalStore((state: any) => state)
     const userId = useBaseStore((state: any) => state.userId)
-    const { trainType, setTrainType } = useUserStore((state: any) => state)
 
     useEffect(() => {
         setNotificationMessage('')

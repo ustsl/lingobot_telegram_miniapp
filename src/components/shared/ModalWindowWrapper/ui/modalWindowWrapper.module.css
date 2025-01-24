@@ -1,0 +1,88 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.modalWindow {
+    margin: 20px;
+    margin-top: 8rem;
+    padding: 20px;
+    position: relative;
+    background: var(--tg-theme-secondary-bg-color);
+    border-radius: var(--border-radius);
+    max-width: 720px;
+    min-width: 300px;
+    width: 100%;
+    z-index: 100;
+    margin-bottom: 8rem;
+    height: fit-content;
+    border: 1px solid var(--tg-theme-button-text-color);
+}
+
+.weightModal {
+    max-width: 800px;
+    width: 80%;
+}
+
+.clearModal {
+    width: fit-content;
+    background: transparent;
+    padding: 0px;
+    max-width: unset;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+
+
+.closeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: -40px;
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--tg-theme-button-text-color);
+    user-select: none;
+    z-index: 200;
+    transition: all .4s ease;
+    background-color: var(--tg-theme-bg-color);
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    font-size: 25px;
+    padding-bottom: 4px;
+}
+
+.closeButton:hover {
+    background-color: var(--light-blue-bg-color);
+}
+
+@media (max-width:650px) {
+    .clear {
+        width: 100%;
+        max-width: fit-content;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .modalWindow {
+        min-width: 90%;
+        margin-top: 4rem;
+    }
+}

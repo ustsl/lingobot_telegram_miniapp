@@ -12,6 +12,7 @@ export default function RepeatWordTrainer() {
         <BodyComponent>
             <FullScreen>
                 <VerbsCarousel />
+
             </FullScreen>
         </BodyComponent>
     )

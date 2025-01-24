@@ -14,7 +14,7 @@ export const ModalComponent = ({ isOpen, onClose, children, width }: IModalCompo
 
     const path = usePathname();
 
-    const [currentPath, setPath] = useState(path)
+    const [currentPath] = useState(path)
 
 
     const modalRef = useRef<HTMLDivElement | null>(null);
