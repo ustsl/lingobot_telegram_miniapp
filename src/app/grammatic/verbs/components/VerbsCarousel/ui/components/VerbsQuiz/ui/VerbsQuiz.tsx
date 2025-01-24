@@ -183,7 +183,6 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
                             <>
                                 <RulesComponent rules={relatedRules} />
                                 <WrongAnswerBlock
-                                    header="Допущена ошибка"
                                     content={`Ваш ответ: ${userAnswer}</br> Правильный ответ: ${correctAnswer}`}
                                 />
 
