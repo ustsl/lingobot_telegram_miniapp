@@ -3,11 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './successComponent.module.css';
 
-export const SuccessComponent = () => {
+export const SuccessComponent = ({ title, description }: { title: string, description: string }) => {
     return (
         <div className={styles.block}>
             <Image src={confetti} width={150} height={150} alt="conf" />
-            <div className={styles.text}>Тренировка завершена</div>
+            <h3 className={styles.title}>{title}</h3>
+            <p className={styles.description}>{description}</p>
+
             <Link href="/" className={styles.link}>Вернуться в меню</Link>
         </div>
     )

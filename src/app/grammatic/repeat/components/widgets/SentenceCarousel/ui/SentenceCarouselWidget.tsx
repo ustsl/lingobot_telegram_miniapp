@@ -77,7 +77,9 @@ export const SentenceCarousel = () => {
 
             {
                 isFinish &&
-                <SuccessComponent />
+                <SuccessComponent
+                    title={"Тренировка успешно завершена!"}
+                    description={'Возвращайтесь к процессу завтра'} />
             }
 
             {

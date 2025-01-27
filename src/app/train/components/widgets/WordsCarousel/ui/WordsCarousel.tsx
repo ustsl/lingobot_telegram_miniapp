@@ -136,14 +136,12 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             <FlexBlock>
 
                 {phase == 'new' && step < wordList.length ?
-                    <HintComponent text={`Добавлено: ${step} из ${wordList.length} слов`} />
+                    <HintComponent text={`Осталось добавить: ${wordList.length}`} />
                     :
-                    <HintComponent text={`Осталось: ${wordList.length}`} />
+                    <HintComponent text={`Осталось повторить: ${wordList.length}`} />
                 }
 
                 <BackHomeLink />
-
-
             </FlexBlock>
 
 
@@ -160,7 +158,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                         (
                             <>
                                 <ButtonComponent
-                                    onClick={() => handleScrollWord(0)}
+                                    onClick={() => handleRememberWord(phase)}
                                     text="Изучить" color="success" />
                                 <ButtonComponent
                                     onClick={() => handleReplaceWord()}
@@ -182,7 +180,18 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
             }
             {
                 isActive && wordList.length == 0 &&
-                <SuccessComponent />
+                <>
+                    {phase === 'new' ?
+                        <SuccessComponent
+                            title={"Слова успешно добавлены"}
+                            description={'И теперь доступны в режиме повтора'} />
+                        :
+                        <SuccessComponent
+                            title={"Тренировка успешно завершена!"}
+                            description={'Возвращайтесь к процессу завтра'} />}
+
+                </>
+
             }
 
             {

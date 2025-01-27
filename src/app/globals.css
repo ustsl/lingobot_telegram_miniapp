@@ -23,7 +23,7 @@
   --l-font-size: 18px;
   --xl-font-size: 20px;
   --l-font-weight: 600;
-  /* 
+
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-bg-color: #212121;
   --tg-theme-secondary-bg-color: #0f0f0f;
@@ -33,7 +33,7 @@
   --tg-theme-hint-color: #aaaaaa;
   --tg-theme-accent-text-color: #8774e1;
   --tg-theme-text-color: white;
-  --tg-theme-section-header-text-color: #aaaaaa; */
+  --tg-theme-section-header-text-color: #aaaaaa;
 }
 
 body {

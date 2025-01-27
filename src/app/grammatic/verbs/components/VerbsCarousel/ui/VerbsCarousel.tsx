@@ -85,7 +85,9 @@ export const VerbsCarousel = () => {
 
             {
                 isFinish &&
-                <SuccessComponent />
+                <SuccessComponent
+                    title={"Тренировка успешно завершена!"}
+                    description={'Вы можете запустить ее в любой момент заново'} />
             }
 
             {
