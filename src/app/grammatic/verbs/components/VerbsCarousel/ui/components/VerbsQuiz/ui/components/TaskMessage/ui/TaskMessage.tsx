@@ -12,7 +12,7 @@ interface ITaskMessage {
 }
 
 export const TaskMessage = ({ currentTense, currentPolarity, currentPerson }: ITaskMessage) => {
-    const message = `${translate.polarity[currentPolarity]}, ${translate.persons[currentPerson]}, ${translate.tenses[currentTense]}`;
+    const message = translate[currentPerson][currentTense][currentPolarity]
     return (
         <div className={styles.task}>
             <h4>Впишите глагол в следующей форме</h4>
