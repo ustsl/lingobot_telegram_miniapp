@@ -40,7 +40,7 @@ export const SentenceCarousel = () => {
     function handleSetSentenceData(userId: number) {
         console.log('get-sentences')
         const data = {
-            method: "/sentence_actions/get_train_list/",
+            method: "/sentence_actions/get_train_list",
             data: { user: userId }
         }
         postResponse(data)

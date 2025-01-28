@@ -18,7 +18,7 @@ export function sendProgress(userId: number | string, word: string, isRaise: 0 |
 
 export function sendSentenceProgress(userID: number | string, sentenceID: number, raise: boolean) {
     const data = {
-        method: '/sentence_actions/update_progress/',
+        method: '/sentence_actions/train',
         data: {
             user: userID,
             id: sentenceID,
