@@ -11,7 +11,7 @@ import { IWordEntry } from "./wordsCarousel.props";
 import { WordComponent } from './components/WordComponent';
 
 import { BackHomeLink } from '@/components/features/BackHomeLink';
-import { sendProgress } from '@/functions/sendProgress';
+import { sendAddWord, sendRepeatProgress } from '@/functions/sendProgress';
 import { HintComponent } from '@/components/shared/HintComponent';
 import { shuffleArray } from '@/functions/shuffleArray';
 import { ButtonComponent } from '@/components/shared/ButtonComponent';
@@ -52,14 +52,14 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
 
 
 
-    function handleScrollWord(repeat: 0 | 1) {
+    function handleScrollWord() {
         setStep(prevStep => prevStep + 1);
         setUniqStep(prevStep => prevStep + 1);
 
         setWordList(prevWordList => {
             if (prevWordList.length > 0) {
                 const firstElement = prevWordList[0];
-                sendProgress(userId, firstElement.word, 0, 0, repeat)
+                sendRepeatProgress(userId, firstElement.pk, false)
                 const newWordList = [...prevWordList.slice(1), firstElement];
                 return newWordList;
             }
@@ -80,7 +80,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         setExceptions(Array.from(updatedExceptions));
 
         postResponse(data).then((result: any) => {
-            sendProgress(userId, wordList[0].word, 0, 1, 0)
+            sendAddWord(userId, wordList[0].pk, true)
             if (result && result?.word_list && result?.status && (result.word_list).length > 0) {
                 const item = result.word_list[0]
                 setWordList([item, ...wordList.slice(1)])
@@ -93,11 +93,16 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     function handleRememberWord(phase: 'new' | 'repeat') {
         setUniqStep(prevStep => prevStep + 1);
 
-        let repeat: 0 | 1 = 0
+
+        console.log(wordList[0])
+        console.log(879877987)
+
         if (phase == 'repeat') {
-            repeat = 1
+            sendRepeatProgress(userId, wordList[0].pk, true)
+        } else {
+            sendAddWord(userId, wordList[0].pk, false)
         }
-        sendProgress(userId, wordList[0].word, 1, 0, repeat);
+
         setWordList(prevWordList => [...prevWordList.slice(1)]);
     }
 
@@ -130,6 +135,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     const item = wordList[0];
+
 
     return (
         <>
@@ -171,7 +177,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
                                 onClick={() => handleRememberWord(phase)}
                                 text="Вспомнил" color="success" />
                             <ButtonComponent
-                                onClick={() => handleScrollWord(1)}
+                                onClick={() => handleScrollWord()}
                                 text="Не вспомнил" />
 
                         </>

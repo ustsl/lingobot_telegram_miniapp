@@ -74,6 +74,10 @@ export async function putResponse({ method, data }: { method: string, data: any 
     body: JSON.stringify(data)
   });
 
+  console.log(data)
+
+  console.log(res)
+
 
   if (!res.ok) {
     const errorBody = await res.json();

@@ -1,18 +1,33 @@
 import { postResponse, putResponse } from "@/api/restAPI";
 
-export function sendProgress(userId: number | string, word: string, isRaise: 0 | 1, isStudied: 0 | 1, isRepeat: 0 | 1) {
+
+export function sendRepeatProgress(userId: number | string, word: number, raise: boolean) {
+
     const data = {
-        method: '/customer/create_progress/',
+        method: '/word_actions/train',
         data: {
             user: userId,
-            word: word,
-            raise_progress: isRaise,
-            is_studied: isStudied,
-            repeat: isRepeat
+            id: word,
+            raise: raise
+        }
+    }
+    console.log(data)
+    putResponse(data);
+}
+
+
+export function sendAddWord(userId: number | string, word: number, is_studied: boolean) {
+    const data = {
+        method: '/word_actions/train',
+        data: {
+            user: userId,
+            id: word,
+            is_studied: is_studied
         }
     }
     postResponse(data);
 }
+
 
 
 
@@ -25,5 +40,6 @@ export function sendSentenceProgress(userID: number | string, sentenceID: number
             raise: raise ? 1 : ''
         }
     }
+    console.log(data)
     putResponse(data);
 }
