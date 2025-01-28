@@ -50,7 +50,7 @@ export default function LimitPage() {
     function handleLoad() {
 
         const data = {
-            method: `/word_actions/get_user_list/${page > 0 ? `?page=${page}` : ``}`,
+            method: `/word_actions/get_user_list${page > 0 ? `?page=${page}` : ``}`,
             data: {
                 user: userId,
             }
