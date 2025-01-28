@@ -5,25 +5,19 @@ import { useModalWrapper } from "@/components/shared/ModalWindowWrapper";
 import { RegularButtonComponent } from "@/components/shared/RegularButtonComponent";
 
 interface Rule {
-    id: string;
     title: string;
     description: string;
 }
 
-export const RulesComponent = ({ rules }: { rules: Rule[] }) => {
+export const RulesComponent = ({ rule }: { rule: Rule }) => {
 
     const { setIsOpenModal, setContentModal } = useModalWrapper()
 
     const handleClick = () => {
         const ModalContent =
-            <GridBlock gridSize="S">
-                {rules.map(rule => {
-                    return (
-                        <GridBlock key={rule.id} gridSize="XS">
-                            <h4>{rule.title}</h4>
-                            <p>{rule.description}</p>
-                        </GridBlock>)
-                })}
+            <GridBlock gridSize="XS">
+                <h4>{rule.title}</h4>
+                <p>{rule.description}</p>
             </GridBlock>
         setContentModal(ModalContent)
         setIsOpenModal(true)

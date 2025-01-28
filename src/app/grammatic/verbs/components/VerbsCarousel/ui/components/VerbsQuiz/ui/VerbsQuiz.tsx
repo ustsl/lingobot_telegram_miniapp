@@ -16,6 +16,7 @@ import { PersonKey, PolarityKey, TenseKey } from './verbsQuiz.props';
 
 // Импортируем правила (предположим, что это export const grammarRules = {...})
 import { grammarRules } from './rules'
+import rules from './rules.json'
 import { RulesComponent } from './components/RulesComponent';
 
 interface VerbsQuizProps {
@@ -146,6 +147,8 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
         ...(grammarRules[currentPerson] || []),
     ];
 
+    const rule = rules[currentPerson][currentTense][currentPolarity]
+
     return (
         <CardAnimationWrapper keyUniq={currentVerb.infinitive}>
             <CardWrapper>
@@ -181,7 +184,7 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
                         )}
                         {isChecked && !isCorrect && (
                             <>
-                                <RulesComponent rules={relatedRules} />
+                                <RulesComponent rule={rule} />
                                 <WrongAnswerBlock
                                     content={`Ваш ответ: ${userAnswer}</br> Правильный ответ: ${correctAnswer}`}
                                 />
