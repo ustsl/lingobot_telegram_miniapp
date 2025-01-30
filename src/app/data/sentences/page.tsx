@@ -120,7 +120,9 @@ export default function LimitPage() {
             <Header />
             <BodyComponent>
                 <FlexBlock>
-                    <HintComponent text={`Всего предложений: ${count}`} />
+                    {!isLoading ?
+                        <HintComponent text={`Всего предложений: ${count}`} />
+                        : <div></div>}
                     <BackHomeLink />
                 </FlexBlock>
 

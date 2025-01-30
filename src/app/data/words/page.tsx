@@ -68,7 +68,7 @@ export default function LimitPage() {
                 if (!isReset) {
                     setResults((prev) => [...(prev || []), ...(res?.results || [])]);
                 } else {
-                    setResults(res?.results);
+                    setResults(res?.results || [])
                 }
 
             })
@@ -117,11 +117,13 @@ export default function LimitPage() {
         <>
             <Header />
             <BodyComponent>
-                {!isLoading &&
-                    <FlexBlock>
+
+                <FlexBlock>
+                    {!isLoading ?
                         <HintComponent text={`Всего слов: ${count}`} />
-                        <BackHomeLink />
-                    </FlexBlock>}
+                        : <div></div>}
+                    <BackHomeLink />
+                </FlexBlock>
                 <SearchStringComponent setSearchQuery={setSearch} />
                 <GridBlock gridSize="L">
                     <ItemsBlock results={results} onDelete={handleDelete} />
