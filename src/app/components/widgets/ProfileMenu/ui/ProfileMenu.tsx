@@ -13,7 +13,7 @@ export const ProfileMenu = () => {
 
     return (
         <GridBlock gridSize='S'>
-            <PointName text={'Хранилище'} />
+            <PointName text={'Статистика'} />
             <div className={styles.block}>
                 <ButtonMenuPoint link="/data/sentences" text="Добавленные предложения" />
                 <ButtonMenuPoint link="/data/words" text="Добавленные слова" />

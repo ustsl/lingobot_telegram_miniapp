@@ -13,7 +13,7 @@ export const ItemsBlock = ({ results, onDelete }: { results: ISentenceListItem[]
                         <div className={styles.item}>
                             <span className={styles.sentence}>{item.sentence_text}</span>
                             <span className={styles.translate}>{item.ru_translation}</span>
-                            {/* <span className={styles.stat}>Уровень знания: {item.repeat_number}</span> */}
+                            <span className={styles.stat}>Уровень запоминания: {item.repeat_number}</span>
                         </div>
                         <div className={styles.delete} onClick={() => onDelete(item.id)}>
                             <MinusIcon />

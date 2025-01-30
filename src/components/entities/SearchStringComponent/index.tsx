@@ -1,0 +1,1 @@
+export { SearchStringComponent } from "./ui/SearchStringComponent";
