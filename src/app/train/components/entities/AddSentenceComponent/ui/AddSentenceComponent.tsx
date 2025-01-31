@@ -12,7 +12,7 @@ export const AddSentenceComponent = ({ sentence, ru }: { sentence: string, ru: s
     function handleSave() {
         setNotificationMessage('');
         const data = {
-            method: '/sentence_actions/add_sentence/',
+            method: '/sentence_actions/add_sentence',
             data: {
                 user: userId,
                 sentence: sentence,
