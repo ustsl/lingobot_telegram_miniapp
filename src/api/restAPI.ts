@@ -74,12 +74,12 @@ export async function putResponse({ method, data }: { method: string, data: any 
     body: JSON.stringify(data)
   });
 
-  console.log(data)
-
-  console.log(res)
 
 
   if (!res.ok) {
+    console.log(data)
+    console.log(res)
+    console.log(res.statusText)
     const errorBody = await res.json();
     console.error('API error response:', errorBody);
     return false//throw new Error(`Failed to post data: ${errorBody.detail || 'Unknown error'}`);
