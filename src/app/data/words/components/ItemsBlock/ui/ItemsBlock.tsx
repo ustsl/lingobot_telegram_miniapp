@@ -15,7 +15,7 @@ export const ItemsBlock = ({ results, onDelete }: { results: ISentenceListItem[]
                             <span className={styles.translate}>{item.ru_translation}</span>
 
                             <span className={styles.stat}>
-                                {item.is_studied ? "Слово выучено" : `Количество повторений без ошибок: ${item.repeat_number}`}
+                                {item.is_studied ? "Слово выучено" : `Уровень запоминания: ${item.repeat_number}`}
                             </span>
 
                         </div>
