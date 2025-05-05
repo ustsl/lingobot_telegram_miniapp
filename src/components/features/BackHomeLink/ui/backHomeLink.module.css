@@ -5,6 +5,7 @@
     text-align: left;
     align-items: center;
     font-size: var(--xs-font-size);
+    gap: 5px;
 }
 
 .link span {
@@ -12,6 +13,7 @@
 }
 
 .link svg {
+    width: 10px;
     color: var(--tg-theme-hint-color);
     fill: var(--tg-theme-hint-color);
 }

@@ -16,3 +16,5 @@ export { MagicIcon } from "./ui/base/magic";
 export { StudyIcon } from "./ui/base/study";
 export { RepeatIcon } from "./ui/base/repeat";
 export { DeleteIcon } from "./ui/base/delete";
+export { BackIcon } from "./ui/base/back";
+export { AudioIcon } from "./ui/base/audio";

@@ -33,8 +33,6 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     const trainType = useUserStore((state: any) => state.trainType)
     const [exceptions, setExceptions] = useState<any[]>([])
 
-    const [fadeOut, setFadeOut] = useState(false);
-
     useEffect(() => {
         console.log('trainUseEffect')
         if (userId) {
@@ -42,13 +40,6 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
-
-
-
-
-    useEffect(() => {
-        setFadeOut(false);
-    }, [wordList])
 
 
 

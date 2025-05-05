@@ -11,6 +11,13 @@
     font-size: 30px;
     cursor: pointer;
     transition: all .4s ease;
+    display: flex;
+    align-items: center;
+}
+
+.button svg {
+    fill: var(--tg-theme-text-color);
+    width: 30px;
 }
 
 .button:hover {

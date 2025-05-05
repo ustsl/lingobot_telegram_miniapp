@@ -3,6 +3,7 @@ import styles from './audioComponent.module.css';
 import { API_DOMAIN } from "@/api/settings";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { AudioIcon } from '@/icons';
 
 export const AudioComponent = ({ soundPath }: { soundPath: string }) => {
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -42,7 +43,7 @@ export const AudioComponent = ({ soundPath }: { soundPath: string }) => {
     return (
         <div className={styles.audioContainer}>
             <button className={styles.playButton} onClick={togglePlayPause}>
-                <FontAwesomeIcon icon={faHeadphones} />
+                <AudioIcon />
             </button>
             <audio
                 ref={audioRef}

@@ -4,7 +4,7 @@ import { BodyComponent } from "@/components/shared/Body";
 import { Header } from "@/components/widgets/Header";
 import { BackHomeLink } from "@/components/features/BackHomeLink";
 import { GridBlock } from "@/components/shared/GridBlock";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useBaseStore } from "@/store/useStore";
 import { postResponse } from "@/api/restAPI";
 import { ItemsBlock } from "./components/ItemsBlock";
@@ -12,6 +12,7 @@ import { ISentenceListItem } from "./components/ItemsBlock/ui/itemsBlock.props";
 import { FlexBlock } from "@/components/shared/FlexBlock";
 import { HintComponent } from "@/components/shared/HintComponent";
 import { SearchStringComponent } from "@/components/entities/SearchStringComponent";
+import { paginatedFetch } from "@/api/paginatedFetch";
 
 export default function LimitPage() {
 
@@ -51,37 +52,31 @@ export default function LimitPage() {
         });
     }
 
+
     function handleLoad(isReset: boolean) {
-        setIsLoading(true);
+        setIsLoading(true)
+        const currentPage = isReset ? 1 : page
 
-        const data = {
-            method: `/sentence_actions/get_user_list${page > 0 ? `?page=${page}` : ""}`,
-            data: {
-                user: userId,
-                search: search
-            },
-        };
-
-        postResponse(data)
-            .then((res) => {
-                setNextPage(!!res?.next);
-                setCount(res?.count || 0);
-                if (!isReset) {
-                    setResults((prev) => [...(prev || []), ...(res?.results || [])]);
-                } else {
-                    setResults(res?.results || [])
-                }
-
+        paginatedFetch<ISentenceListItem>(
+            "/sentence_actions/get_user_list",
+            currentPage,
+            { user: userId, search }
+        )
+            .then(({ results: items, count, next }) => {
+                setCount(count)
+                setNextPage(!!next)
+                setResults(prev => isReset ? items : [...prev, ...items])
             })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            .finally(() => setIsLoading(false))
     }
+
 
 
     useEffect(() => {
         if (!userId) return;
-        handleLoad(false);
+        if (page !== 1) {
+            handleLoad(false);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, userId]);
 
@@ -109,9 +104,10 @@ export default function LimitPage() {
     }, [nextPage, isLoading]);
 
 
+    // сброс и загрузка при изменении поиска
     useEffect(() => {
+        setPage(1)
         handleLoad(true)
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
 
@@ -138,7 +134,9 @@ export default function LimitPage() {
                         </p>
                     )}
                     {isLoading && <p>Загрузка...</p>}
-                    <div ref={sentinelRef} style={{ height: 1, background: "transparent" }}></div>
+                    {!isLoading && results.length > 0 &&
+                        <div ref={sentinelRef} style={{ height: 1, background: "transparent" }} />
+                    }
                 </GridBlock>
             </BodyComponent>
         </>

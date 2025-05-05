@@ -1,13 +1,13 @@
 'use client'
 
+import { useEffect, useRef, useState } from "react"
 import { BodyComponent } from "@/components/shared/Body"
 import { Header } from "@/components/widgets/Header"
-
 import { BackHomeLink } from "@/components/features/BackHomeLink"
 import { GridBlock } from "@/components/shared/GridBlock"
-import { useEffect, useRef, useState } from "react"
 import { useBaseStore } from "@/store/useStore"
 import { postResponse } from "@/api/restAPI"
+import { paginatedFetch } from "@/api/paginatedFetch"
 import { ItemsBlock } from "./components/ItemsBlock"
 import { ISentenceListItem } from "./components/ItemsBlock/ui/itemsBlock.props"
 import { FlexBlock } from "@/components/shared/FlexBlock"
@@ -15,121 +15,100 @@ import { HintComponent } from "@/components/shared/HintComponent"
 import { SearchStringComponent } from "@/components/entities/SearchStringComponent"
 
 export default function LimitPage() {
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [count, setCount] = useState(0)
+    const userId = useBaseStore((s: any) => s.userId)
+    const [search, setSearch] = useState("")
+    const [page, setPage] = useState(1)
     const [results, setResults] = useState<ISentenceListItem[]>([])
-    const [page, setPage] = useState<number>(1)
-    const [nextPage, setNextPage] = useState<boolean>(false)
-    const userId = useBaseStore((state: any) => state.userId);
-    const [search, setSearch] = useState('')
+    const [count, setCount] = useState(0)
+    const [nextPage, setNextPage] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const observer = useRef<IntersectionObserver | null>(null);
-    const sentinelRef = useRef<HTMLDivElement | null>(null);
-
+    const observer = useRef<IntersectionObserver | null>(null)
+    const sentinelRef = useRef<HTMLDivElement | null>(null)
 
     function handleDelete(id: number) {
         const data = {
             method: `/word_actions/delete_user_action`,
-            data: {
-                user: userId,
-                id: id
-            }
-        };
-        postResponse(data).then((res) => {
+            data: { user: userId, id }
+        }
+        postResponse(data).then(res => {
             if (res) {
-                if (results.length < 2) {
-                    setPage(1)
-                }
-                setResults((prevResults) =>
-                    prevResults ? prevResults.filter((item) => item.id !== id) : []
-                );
+                if (results.length < 2) setPage(1)
+                setResults(prev => prev.filter(item => item.id !== id))
             }
-        });
-
+        })
     }
 
     function handleLoad(isReset: boolean) {
+        setIsLoading(true)
+        const currentPage = isReset ? 1 : page
 
-        setIsLoading(true);
-
-        const data = {
-            method: `/word_actions/get_user_list${page > 0 ? `?page=${page}` : ``}`,
-            data: {
-                user: userId,
-                search: search
-            }
-        };
-
-        postResponse(data)
-            .then((res) => {
-                setNextPage(!!res?.next);
-                setCount(res?.count || 0);
-                if (!isReset) {
-                    setResults((prev) => [...(prev || []), ...(res?.results || [])]);
-                } else {
-                    setResults(res?.results || [])
-                }
-
+        paginatedFetch<ISentenceListItem>(
+            "/word_actions/get_user_list",
+            currentPage,
+            { user: userId, search }
+        )
+            .then(({ results: items, count, next }) => {
+                setCount(count)
+                setNextPage(!!next)
+                setResults(prev => isReset ? items : [...prev, ...items])
             })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            .finally(() => setIsLoading(false))
     }
 
     useEffect(() => {
         if (!userId) return;
-        handleLoad(false);
+        if (page !== 1) {
+            handleLoad(false);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, userId]);
 
 
+    // сброс и загрузка при изменении поиска
     useEffect(() => {
-
-        if (observer.current) {
-            observer.current.disconnect();
-        }
-
-        observer.current = new IntersectionObserver((entries) => {
-            const firstEntry = entries[0];
-            if (firstEntry.isIntersecting && !isLoading && nextPage) {
-                setPage((prev) => prev + 1);
-            }
-        });
-
-        if (sentinelRef.current) {
-            observer.current.observe(sentinelRef.current);
-        }
-
-        return () => {
-            if (observer.current) observer.current.disconnect();
-        };
-    }, [nextPage, isLoading]);
-
-
-    useEffect(() => {
+        setPage(1)
         handleLoad(true)
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search])
+
+    // бесконечный скролл
+    useEffect(() => {
+        observer.current?.disconnect()
+        observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && !isLoading && nextPage) {
+                setPage(p => p + 1)
+            }
+        })
+        if (sentinelRef.current) observer.current.observe(sentinelRef.current)
+        return () => { observer.current?.disconnect() }
+    }, [isLoading, nextPage])
 
     return (
         <>
             <Header />
             <BodyComponent>
-
                 <FlexBlock>
-                    {!isLoading ?
-                        <HintComponent text={`Всего слов: ${count}`} />
-                        : <div></div>}
+                    {!isLoading
+                        ? <HintComponent text={`Всего слов: ${count}`} />
+                        : <div />}
                     <BackHomeLink />
                 </FlexBlock>
+
                 <SearchStringComponent setSearchQuery={setSearch} />
+
                 <GridBlock gridSize="L">
                     <ItemsBlock results={results} onDelete={handleDelete} />
-                    {!isLoading && results.length === 0 && <p>Добавьте первые слова для запоминания с помощью тренажера</p>}
+
+                    {!isLoading && results.length === 0 &&
+                        <p>Добавьте первые слова для запоминания с помощью тренажера</p>
+                    }
+
                     {isLoading && <p>Загрузка...</p>}
-                    <div ref={sentinelRef} style={{ height: 1, background: "transparent" }}></div>
+
+                    {!isLoading && results.length > 0 &&
+                        <div ref={sentinelRef} style={{ height: 1, background: "transparent" }} />
+                    }
                 </GridBlock>
             </BodyComponent>
         </>
