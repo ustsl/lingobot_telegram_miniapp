@@ -1,36 +1,37 @@
 'use client'
 
+import React, { useRef, ReactNode } from 'react'
+import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import styles from './cardAnimationWrapper.module.css'
 
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-
-
 interface Props {
-    children: React.ReactNode
+    children: ReactNode
     keyUniq: number | string
 }
 
-export const CardAnimationWrapper: React.FC<Props> = ({
-    children,
-    keyUniq
-}) => {
+export const CardAnimationWrapper: React.FC<Props> = ({ children, keyUniq }) => {
+    const nodeRef = useRef<HTMLDivElement>(null)
+
     return (
-        <TransitionGroup className={styles.container}>
-            <CSSTransition
-                key={keyUniq}
-                timeout={300}
-                classNames={{
-                    enter: styles.enter,
-                    enterActive: styles.enterActive,
-                    exit: styles.exit,
-                    exitActive: styles.exitActive,
-                }}
-                unmountOnExit
-            >
-                {children}
-            </CSSTransition>
-        </TransitionGroup>
-
-
-    );
-};
+        <div className={styles.container}>
+            <SwitchTransition mode="out-in">
+                <CSSTransition
+                    key={keyUniq}
+                    nodeRef={nodeRef}
+                    timeout={300}
+                    classNames={{
+                        enter: styles.enter,
+                        enterActive: styles.enterActive,
+                        exit: styles.exit,
+                        exitActive: styles.exitActive,
+                    }}
+                    unmountOnExit
+                >
+                    <div ref={nodeRef} className={styles.cardWrapper}>
+                        {children}
+                    </div>
+                </CSSTransition>
+            </SwitchTransition>
+        </div>
+    )
+}
