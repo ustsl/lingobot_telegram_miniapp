@@ -21,9 +21,6 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
 }) => {
     const [data, setData] = useState<SentenceData[]>(sentenceList);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-    // Этот стейт будет менять ключ для дочернего компонента
-    // и заставлять его перевмонтироваться при скипе
     const [childKey, setChildKey] = useState<number>(0);
 
     const userId = useBaseStore((state: any) => state.userId);

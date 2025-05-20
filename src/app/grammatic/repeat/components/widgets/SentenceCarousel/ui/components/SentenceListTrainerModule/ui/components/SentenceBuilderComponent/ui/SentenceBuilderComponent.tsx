@@ -17,94 +17,104 @@ export const SentenceBuilderComponent: React.FC<Props> = ({
     handleNext,
     handleSkip,
 }) => {
-    // Исходные слова
+    // Очищенные слова (без точек, запятых и в нижнем регистре)
     const [initialWords, setInitialWords] = useState<string[]>([]);
     // Слова, которые ещё не использованы (перемешанный массив)
     const [remainingWords, setRemainingWords] = useState<string[]>([]);
     // Слова, которые пользователь уже набрал
     const [selectedWords, setSelectedWords] = useState<string[]>([]);
-    // Результат проверки
+    // Флаги состояния
     const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
-    // ------------------------------
-    // Перемешаем предложение один раз при первом рендере (или когда sentence меняется)
+    // При первом рендере или при изменении sentence
     useEffect(() => {
-        const splitted = sentence.trim().split(" ");
-        setInitialWords(splitted);
-        setSelectedWords([]);
+        const cleaned = sentence
+            .trim()
+            .split(/\s+/)
+            .map((w) => w.replace(/[.,!?]/g, "").toLowerCase());
 
-        // Перемешиваем массив
-        const shuffled = shuffleArray([...splitted]);
-        setRemainingWords(shuffled);
+        setInitialWords(cleaned);
+        setRemainingWords(shuffleArray([...cleaned]));
+        setSelectedWords([]);
+        setIsError(false);
+        setIsSuccess(false);
     }, [sentence]);
 
-    // ------------------------------
-    // Клик по слову в списке remainingWords:
-    //   - переносим его в selectedWords
-    // Клик по слову в списке selectedWords:
-    //   - возвращаем обратно в remainingWords
+    // Авто-переход при успехе через 1.5 секунды
+    useEffect(() => {
+        if (isSuccess) {
+            const timer = setTimeout(() => {
+                handleNext();
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [isSuccess, handleNext]);
+
+    // Перемещение слова между списками
     const handleWordClick = (word: string, fromSelected: boolean) => {
+        if (isSuccess || isError) return; // блокируем клики после проверки
+
         if (fromSelected) {
-            // Удаляем из selectedWords, возвращаем в remainingWords
             setSelectedWords((prev) => prev.filter((w) => w !== word));
             setRemainingWords((prev) => [...prev, word]);
         } else {
-            // Удаляем из remainingWords, добавляем в selectedWords
             setRemainingWords((prev) => prev.filter((w) => w !== word));
             setSelectedWords((prev) => [...prev, word]);
         }
     };
 
-    // ------------------------------
-    // Нажатие на "Проверить"
-    // Если собранная строка совпадает с исходной => handleNext()
-    // иначе => handleSkip()
+    // Проверка собранного предложения
     const handleCheck = () => {
         const userSentence = selectedWords.join(" ");
         const correctSentence = initialWords.join(" ");
-
         if (userSentence === correctSentence) {
-            handleNext();
+            setIsSuccess(true);
         } else {
-            setIsError(true)
+            setIsError(true);
         }
     };
 
     return (
         <div className={styles.block}>
             <GridBlock gridSize="S">
-                {/* Блок слов, которые ещё не выбраны */}
-                {!isError && <GridBlock gridSize="XS">
-                    <HintComponent text="Соберите предложение из слов" />
-                    <div className={styles.wordsContainer}>
-                        {remainingWords.map((word) => (
-                            <span
-                                key={`rem-${word}-${Math.random()}`}
-                                className={styles.word}
-                                onClick={() => handleWordClick(word, false)}
-                            >
-                                {word}
-                            </span>
-                        ))}
-                    </div>
-                </GridBlock>}
+                {/* Блок доступных слов */}
+                {!isError && !isSuccess && (
+                    <GridBlock gridSize="XS">
+                        <HintComponent text="Соберите предложение из слов" />
+                        <div className={styles.wordsContainer}>
+                            {remainingWords.map((word) => (
+                                <span
+                                    key={word}
+                                    className={styles.word}
+                                    onClick={() => handleWordClick(word, false)}
+                                >
+                                    {word}
+                                </span>
+                            ))}
+                        </div>
+                    </GridBlock>
+                )}
 
-                {/* Блок слов, которые пользователь уже выбрал (порядок клика) */}
+                {/* Результат, ошибка или успех */}
                 <GridBlock gridSize="XS">
-                    {isError &&
+                    {isError ? (
                         <>
                             <HintComponent text="Правильный вариант:" />
                             <p>{sentence}</p>
                         </>
-                    }
-
-                    {!isError && selectedWords.length > 0 &&
+                    ) : isSuccess ? (
                         <>
-                            <HintComponent text="Результат:" />
+                            <HintComponent text="Верно 👍" />
+                            <p >{initialWords.join(" ")}</p>
+                        </>
+                    ) : selectedWords.length > 0 ? (
+                        <>
+                            <HintComponent text="Ваш результат:" />
                             <div className={styles.wordsContainer}>
                                 {selectedWords.map((word) => (
                                     <span
-                                        key={`sel-${word}-${Math.random()}`}
+                                        key={word}
                                         className={styles.word}
                                         onClick={() => handleWordClick(word, true)}
                                     >
@@ -113,16 +123,20 @@ export const SentenceBuilderComponent: React.FC<Props> = ({
                                 ))}
                             </div>
                         </>
-                    }
+                    ) : null}
                 </GridBlock>
             </GridBlock>
 
-
-            {isError && <ButtonComponent onClick={handleSkip} text="Дальше" size="S" />}
-            {!isError && <ButtonComponent onClick={handleCheck} text="Проверить" size="S" />}
-
-
+            {/* Кнопки */}
+            {!isSuccess && (
+                <>
+                    {isError ? (
+                        <ButtonComponent onClick={handleSkip} text="Дальше" size="S" />
+                    ) : (
+                        <ButtonComponent onClick={handleCheck} text="Проверить" size="S" />
+                    )}
+                </>
+            )}
         </div>
     );
 };
-
