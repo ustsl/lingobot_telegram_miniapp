@@ -68,6 +68,16 @@ export const VerbsCarousel = () => {
 
     }
 
+    if (isFinish) {
+        return <SuccessComponent
+            title={"Тренировка успешно завершена!"}
+            description={'Вы можете запустить ее в любой момент заново'} />
+    }
+
+    if (error) {
+        return <ErrorComponent
+            text={error} />
+    }
 
     return (
         <GridBlock gridSize="S">
@@ -76,18 +86,6 @@ export const VerbsCarousel = () => {
                     <HintComponent text={`Осталось успешно ответить: ${limit}`} />
                     <BackHomeLink />
                 </FlexBlock>
-            }
-
-            {error && <ErrorComponent
-                text={error} />
-            }
-
-
-            {
-                isFinish &&
-                <SuccessComponent
-                    title={"Тренировка успешно завершена!"}
-                    description={'Вы можете запустить ее в любой момент заново'} />
             }
 
             {

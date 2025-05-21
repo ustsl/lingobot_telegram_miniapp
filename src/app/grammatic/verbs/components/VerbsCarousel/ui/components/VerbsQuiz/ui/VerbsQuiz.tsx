@@ -1,22 +1,20 @@
+import React, { useState, useEffect } from "react";
 import styles from './verbsQuiz.module.css';
 
-import React, { useState, useEffect } from "react";
 import { Verb } from "../../../verbsCarousel.props";
 import { ButtonComponent } from "@/components/shared/ButtonComponent";
 import { InputElement } from "@/components/shared/InputElement";
 import { CardAnimationWrapper } from "@/components/shared/CardAnimationWrapper";
 import { CardWrapper } from "@/components/shared/CardWrapper";
-
 import { TaskMessage } from "./components/TaskMessage";
 import { TitleComponent } from "./components/TitleBlock";
 import { GridBlock } from "@/components/shared/GridBlock";
 import { getRandomPersonKey, getRandomPolarityKey, getRandomTenseKey, handleSaveStat } from "./functions";
 import { WrongAnswerBlock } from "@/components/shared/WrongAnswerBlock";
-import { PersonKey, PolarityKey, TenseKey } from './verbsQuiz.props';
+import { HintComponent } from "@/components/shared/HintComponent"; // импортируем HintComponent
 
-// Импортируем правила (предположим, что это export const grammarRules = {...})
-import { grammarRules } from './rules'
-import rules from './rules.json'
+import { PersonKey, PolarityKey, TenseKey } from './verbsQuiz.props';
+import rules from './rules.json';
 import { RulesComponent } from './components/RulesComponent';
 
 interface VerbsQuizProps {
@@ -31,129 +29,95 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
     verbsList,
     setIsFinish,
     setLimit,
-    userId,
-    setPercentExperience
+    setPercentExperience,
+    userId
 }) => {
     const [queue, setQueue] = useState<Verb[]>([]);
     const [currentVerb, setCurrentVerb] = useState<Verb | null>(null);
-
-    // Параметры текущего шага
     const [currentTense, setCurrentTense] = useState<TenseKey | null>(null);
     const [currentPolarity, setCurrentPolarity] = useState<PolarityKey | null>(null);
     const [currentPerson, setCurrentPerson] = useState<PersonKey | null>(null);
-
-    // Ответ пользователя
     const [userAnswer, setUserAnswer] = useState("");
-
-    // Состояния проверки
     const [isChecked, setIsChecked] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState("");
 
-    // Загружаем очередь при монтировании
+    // Загрузка очереди
     useEffect(() => {
-        if (verbsList.length > 0) {
-            setQueue([...verbsList]);
-        }
+        if (verbsList.length) setQueue([...verbsList]);
     }, [verbsList]);
 
-    // Когда обновляется очередь
+    // При изменении queue — готовим новую задачу
     useEffect(() => {
-        if (queue.length === 0) {
-            return;
-        }
-
+        if (!queue.length) return;
         const verb = queue[0];
         setCurrentVerb(verb);
 
-        const randomTense = getRandomTenseKey();
-        const randomPolarity = getRandomPolarityKey();
-        const randomPerson = getRandomPersonKey();
+        const tense = getRandomTenseKey();
+        const polarity = getRandomPolarityKey();
+        const person = getRandomPersonKey();
+        setCurrentTense(tense);
+        setCurrentPolarity(polarity);
+        setCurrentPerson(person);
 
-        setCurrentTense(randomTense);
-        setCurrentPolarity(randomPolarity);
-        setCurrentPerson(randomPerson);
-
-        // Правильный ответ
-        const correct = verb[randomTense][randomPolarity][randomPerson];
+        const correct = verb[tense][polarity][person];
         setCorrectAnswer(correct);
 
-        // Сброс проверки
         setUserAnswer("");
         setIsChecked(false);
         setIsCorrect(false);
     }, [queue, setIsFinish]);
 
-
+    // Авто-переход при правильном ответе через 1.5 с
+    useEffect(() => {
+        if (isChecked && isCorrect) {
+            const timer = setTimeout(() => {
+                // уменьшаем лимит и проверяем окончание
+                setLimit(prev => {
+                    const next = prev - 1;
+                    if (next <= 0) setIsFinish(true);
+                    return next;
+                });
+                // уходим к следующему глаголу
+                setQueue(prev => prev.slice(1));
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [isChecked, isCorrect, setLimit, setIsFinish]);
 
     const handleCheckAnswer = async () => {
         if (!currentVerb || !currentTense || !currentPolarity || !currentPerson) return;
-
-        // Проверяем правильность ответа
-        const isRight = userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
+        const right = userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
 
         try {
-            // Асинхронно получаем результат сохранения
-            const experienceResult = await handleSaveStat(userId, isRight ? 1 : 0);
-            const percentValue = experienceResult.average * 100 as number
-            const pResult = percentValue.toFixed(1)
-            setPercentExperience(pResult)
-
-            // Дальнейшая логика
-            if (isRight) {
-                setIsCorrect(true);
-                setIsChecked(true);
-
-                setLimit((prev) => {
-                    const newVal = prev - 1;
-                    if (newVal <= 0) {
-                        setIsFinish(true);
-                    }
-                    return newVal;
-                });
-
-                setQueue((prevQueue) => {
-                    const newQueue = [...prevQueue];
-                    newQueue.shift();
-                    return newQueue;
-                });
-            } else {
-                setIsCorrect(false);
-                setIsChecked(true);
-            }
-        } catch (error) {
-            console.error('Error saving stat:', error);
+            const { average } = await handleSaveStat(userId, right ? 1 : 0);
+            setPercentExperience((average * 100).toFixed(1));
+        } catch (e) {
+            console.error('Error saving stat:', e);
         }
-    };
 
+        setIsCorrect(right);
+        setIsChecked(true);
+    };
 
     const handleContinueAfterWrong = () => {
         if (!currentVerb) return;
-        setQueue((prevQueue) => {
-            const [wrongVerb, ...rest] = prevQueue;
-            return [...rest, wrongVerb];
+        setQueue(prev => {
+            const [first, ...rest] = prev;
+            return [...rest, first];
         });
     };
 
     if (!currentVerb || !currentTense || !currentPolarity || !currentPerson) {
-        return null; // Здесь можно поставить спиннер или заглушку
+        return null;
     }
 
-    // Собираем связанные правила (тенз, полярность, персона)
-    // Если в словаре нет ключа, подставляем пустой массив
-    const relatedRules = [
-        ...(grammarRules[currentTense] || []),
-        ...(grammarRules[currentPolarity] || []),
-        ...(grammarRules[currentPerson] || []),
-    ];
-
-    const rule = rules[currentPerson][currentTense][currentPolarity]
+    const rule = rules[currentPerson][currentTense][currentPolarity];
 
     return (
         <CardAnimationWrapper keyUniq={currentVerb.infinitive}>
             <CardWrapper>
                 <div className={styles.block}>
-
                     <GridBlock gridSize='S'>
                         <TitleComponent
                             word={currentVerb.infinitive}
@@ -171,8 +135,8 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
                         {!isChecked && (
                             <>
                                 <InputElement
-                                    handler={(e) => setUserAnswer(e.target.value)}
-                                    label={"Введите ответ"}
+                                    handler={e => setUserAnswer(e.target.value)}
+                                    label="Введите ответ"
                                     value={userAnswer}
                                 />
                                 <ButtonComponent
@@ -182,13 +146,20 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
                                 />
                             </>
                         )}
+
+                        {isChecked && isCorrect && (
+                            <>
+                                <HintComponent text="Верно 👍" />
+                                <p>{correctAnswer}</p>
+                            </>
+                        )}
+
                         {isChecked && !isCorrect && (
                             <>
                                 <RulesComponent rule={rule} />
                                 <WrongAnswerBlock
-                                    content={`Ваш ответ: ${userAnswer}</br> Правильный ответ: ${correctAnswer}`}
+                                    content={`Ваш ответ: ${userAnswer}<br/>Правильный ответ: ${correctAnswer}`}
                                 />
-
                                 <ButtonComponent
                                     onClick={handleContinueAfterWrong}
                                     text="К следующей задаче"
@@ -198,7 +169,6 @@ export const VerbsQuiz: React.FC<VerbsQuizProps> = ({
                         )}
                     </GridBlock>
                 </div>
-
             </CardWrapper>
         </CardAnimationWrapper>
     );
