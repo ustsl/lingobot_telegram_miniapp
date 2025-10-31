@@ -18,3 +18,4 @@ export { RepeatIcon } from "./ui/base/repeat";
 export { DeleteIcon } from "./ui/base/delete";
 export { BackIcon } from "./ui/base/back";
 export { AudioIcon } from "./ui/base/audio";
+export { SettingsIcon } from "./ui/base/settings";

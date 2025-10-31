@@ -13,7 +13,7 @@ export const IconMenuPoint = ({ link, text, icon, size, fontSize }: IIconMenuPoi
 
     return (
         <Link href={link} className={linkClassName}>
-            <div className={styles.icon}>{icon}</div>
+            {icon && <div className={styles.icon}>{icon}</div>}
             <span>{text}</span>
         </Link>
     );

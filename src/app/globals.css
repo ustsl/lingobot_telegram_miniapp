@@ -2,16 +2,16 @@
 
 :root {
   --max-width: 768px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --border-radius: 8px;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --light-grey: #f2f2f2;
-  --dark: #1A2440;
-  --regular: #5576D9;
-  --middle: #A0BBF2;
-  --light: #D5E2F2;
+  --dark: #1a2440;
+  --regular: #5576d9;
+  --middle: #a0bbf2;
+  --light: #d5e2f2;
   --success: #0ba331;
   --danger-color: rgb(254, 164, 164);
 
@@ -23,6 +23,10 @@
   --l-font-size: 18px;
   --xl-font-size: 20px;
   --l-font-weight: 600;
+  --m-font-size: 16px;
+  --s-font-size: 14px;
+  --xs-font-size: 12px;
+  --l-font-size: 18px;
 
   /* --tg-theme-button-text-color: #ffffff;
   --tg-theme-bg-color: #212121;
@@ -44,7 +48,6 @@ body {
   background-color: var(--tg-theme-secondary-bg-color);
 }
 
-
 h1,
 h2,
 h3,
@@ -61,9 +64,8 @@ textarea {
   margin: 0;
   padding: 0;
   color: var(--tg-theme-text-color);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
-
 
 a {
   text-decoration: none;
@@ -111,7 +113,7 @@ input[type="checkbox"]:checked {
 /* Символ внутри выбранного радио/чекбокса */
 input[type="radio"]:checked::after,
 input[type="checkbox"]:checked::after {
-  content: '✔';
+  content: "✔";
   /* Символ галочки */
   color: var(--tg-theme-accent-text-color, #fff);
   /* Цвет галочки */
@@ -128,7 +130,7 @@ label {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
 }
 

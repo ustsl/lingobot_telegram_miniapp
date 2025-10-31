@@ -1,14 +1,14 @@
 'use client';
 
-import styles from './settingsMenu.module.css'
 
 import { PointName } from '@/components/shared/PointName';
 import { GridBlock } from '@/components/shared/GridBlock';
 import { useBaseStore, useModalStore, useUserStore } from '@/store/useStore';
 import { postResponse } from '@/api/restAPI';
 import { useTelegram } from '@/hooks/useTelegram';
-import Link from 'next/link';
-import { DeleteIcon } from '@/icons';
+
+import { SettingsIcon } from '@/icons';
+import { LinkComponent } from '@/components/shared/LinkComponent';
 
 export const SettingsMenu = () => {
 
@@ -16,7 +16,7 @@ export const SettingsMenu = () => {
     const userId = useBaseStore((state: any) => state.userId);
     const trainType = useUserStore((state: any) => state.trainType);
     const setTrainType = useUserStore((state: any) => state.setTrainType);
-    const { setOpenModal } = useModalStore((state: any) => state);
+
 
     function handleTrainTypeChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newTrainType = event.target.value;
@@ -35,9 +35,9 @@ export const SettingsMenu = () => {
     return (
         <GridBlock gridSize='M'>
             <GridBlock gridSize="S">
-                <PointName text="Режим перевода" />
+                <PointName text="Режим перевода" icon={<SettingsIcon />} />
                 <GridBlock gridSize="XS">
-                    <label>
+                    <label >
                         <input
                             type="radio"
                             name="trainType"
@@ -47,7 +47,7 @@ export const SettingsMenu = () => {
                         />
                         С турецкого на русский
                     </label>
-                    <label>
+                    <label className='xslabel'>
                         <input
                             type="radio"
                             name="trainType"
@@ -58,21 +58,12 @@ export const SettingsMenu = () => {
                         С русского на турецкий
                     </label>
                 </GridBlock>
-            </GridBlock>
-            <GridBlock gridSize="S">
-                <PointName text={'Управление'} />
                 <GridBlock gridSize="XS">
-                    <Link href="/limits">
-                        Изменить суточный лимит слов
-                    </Link>
-                    <Link href="/categories">
-                        Настроить категории слов на изучение
-                    </Link>
-                    <Link href='https://t.me/ustsl' target="new">Техническая поддержка</Link>
+                    <LinkComponent href="/limits" text="Изменить суточный лимит слов" size='S' />
+                    <LinkComponent href="/categories" text="Настроить категории слов на изучение" size='S' />
                 </GridBlock>
             </GridBlock>
-            <button onClick={setOpenModal} className={styles.danger}><DeleteIcon />
-                <span>Сбросить прогресс тренировок</span></button>
+
         </GridBlock>
     );
 };

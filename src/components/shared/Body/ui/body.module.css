@@ -1,9 +1,9 @@
 .body {
-    margin-top: 20px;
-    background-color: var(--tg-theme-secondary-bg-color);
-    min-height: calc(100vh - 70px);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  margin-top: 10px;
+  background-color: var(--tg-theme-secondary-bg-color);
+  min-height: calc(100vh - 70px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
