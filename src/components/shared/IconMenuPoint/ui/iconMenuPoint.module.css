@@ -17,6 +17,7 @@
     0 1px 2px 0 rgba(0, 0, 0, 0.06);
   border: 0;
   text-align: left;
+  font-weight: 500;
 }
 
 .iconLink:hover {
@@ -46,7 +47,7 @@
 }
 
 .sizeS {
-  padding: 12px 17px;
+  padding: 10px 12px;
 }
 
 .fontSizeS span {
@@ -58,6 +59,6 @@
     font-size: var(--s-font-size);
   }
   .fontSizeS span {
-    font-size: var(--xs-font-size);
+    font-size: 13px;
   }
 }
