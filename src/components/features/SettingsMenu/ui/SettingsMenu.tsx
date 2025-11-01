@@ -3,12 +3,13 @@
 
 import { PointName } from '@/components/shared/PointName';
 import { GridBlock } from '@/components/shared/GridBlock';
-import { useBaseStore, useModalStore, useUserStore } from '@/store/useStore';
+import { useBaseStore, useUserStore } from '@/store/useStore';
 import { postResponse } from '@/api/restAPI';
 import { useTelegram } from '@/hooks/useTelegram';
 
 import { SettingsIcon } from '@/icons';
 import { LinkComponent } from '@/components/shared/LinkComponent';
+import { DeleteProgressButton } from './components/DeleteProgressButton';
 
 export const SettingsMenu = () => {
 
@@ -63,7 +64,7 @@ export const SettingsMenu = () => {
                     <LinkComponent href="/categories" text="Настроить категории слов на изучение" size='S' />
                 </GridBlock>
             </GridBlock>
-
+            <DeleteProgressButton />
         </GridBlock>
     );
 };

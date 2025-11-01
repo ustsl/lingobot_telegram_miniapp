@@ -1,13 +1,13 @@
 .header {
-    padding: 3px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--tg-theme-hint-color);
-    background-color: var(--tg-theme-bg-color);
-    font-size: 12px;
+  padding: 3px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--tg-theme-hint-color);
+  background-color: var(--tg-theme-header-bg-color);
+  font-size: 12px;
 }
 
 .data {
-    margin-top: 0px;
+  margin-top: 0px;
 }

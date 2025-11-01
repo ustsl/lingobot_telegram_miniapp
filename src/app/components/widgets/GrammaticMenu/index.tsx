@@ -1,1 +1,0 @@
-export { GrammaticMenu } from "./ui/GrammaticMenu";

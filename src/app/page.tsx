@@ -1,13 +1,14 @@
 import { Header } from '@/components/widgets/Header'
 import { BodyComponent } from '@/components/shared/Body'
-import { SettingsMenu } from './components/widgets/SettingsMenu'
+import { SettingsMenu } from '../components/features/SettingsMenu'
 import { ResetProgressComponent } from '@/components/entities/ResetProgressComponent'
-import { ProfileMenu } from './components/widgets/ProfileMenu'
-import { MainMenu } from './components/widgets/MainMenu'
-import { GrammaticMenu } from './components/widgets/GrammaticMenu'
+
 import { GridBlock } from '@/components/shared/GridBlock'
 import { LinkComponent } from '@/components/shared/LinkComponent'
-import { DeleteProgressButton } from '@/components/features/DeleteProgressButton'
+
+import { FooterMenuComponent, MenuGroupComponent, MenuPointComponent } from '@/components/shared/MenuGroupComponent'
+import { ExploreIcon } from '@/icons/ui/base/explore'
+import { TrainIcon } from '@/icons/ui/base/train'
 
 
 export default function Home() {
@@ -16,17 +17,29 @@ export default function Home() {
     <>
       <Header />
       <BodyComponent>
-        <MainMenu />
-        <SettingsMenu />
-        <GrammaticMenu />
-        <ProfileMenu />
+        <MenuGroupComponent title="Тренажер слов" icon={<ExploreIcon />}>
+          <MenuPointComponent text={'Выбрать новые слова на изучение'} href={'/train/new'} />
+          <MenuPointComponent text={'Интервальное повторение словаря'} href={'/train/repeat'} />
+          <MenuPointComponent text={'Открыть текущий словарь'} href={'/data/words'} />
+
+          <FooterMenuComponent title={'Настроить тренажер слов'} children={<SettingsMenu />} />
+        </MenuGroupComponent>
+
+        <MenuGroupComponent title="Дополнительные тренажеры" icon={<TrainIcon />}>
+          <MenuPointComponent text={'Тренировка времен глаголов'} href={'/grammatic/verbs'} />
+          <MenuPointComponent text={'Собираем предложения из слов'} href={'/grammatic/repeat'} />
+          <MenuPointComponent text={'Открыть добавленные предложения'} href={'/data/sentences'} />
+
+        </MenuGroupComponent>
+
+
         <GridBlock gridSize="XS">
           <LinkComponent href="https://lingobot.ru/book/" text="Учебник на сайте" size='S' />
           <LinkComponent href="https://t.me/ustsl" text="Техническая поддержка" size='S' />
 
         </GridBlock>
-        <DeleteProgressButton />
-      </BodyComponent>
+
+      </BodyComponent >
       <ResetProgressComponent />
     </>
   )

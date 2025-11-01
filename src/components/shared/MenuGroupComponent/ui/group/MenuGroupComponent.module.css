@@ -1,0 +1,24 @@
+.block {
+  display: grid;
+  gap: 5px;
+}
+
+.title {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.title span {
+  color: var(--tg-theme-hint-color);
+  font-size: var(--s-font-size);
+}
+
+.title svg {
+  max-width: 17px;
+  max-height: 17px;
+  fill: var(--tg-theme-hint-color);
+  color: var(--tg-theme-hint-color);
+}

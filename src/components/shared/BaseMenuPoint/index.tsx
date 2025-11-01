@@ -1,1 +1,1 @@
-export { BaseMenuPoint, BaseMenuButtonPoint } from "./ui/BaseMenuPoint";
+export { BaseMenuButtonPoint } from "./ui/BaseMenuPoint";

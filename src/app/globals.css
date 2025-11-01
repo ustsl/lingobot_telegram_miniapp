@@ -37,7 +37,8 @@
   --tg-theme-hint-color: #aaaaaa;
   --tg-theme-accent-text-color: #8774e1;
   --tg-theme-text-color: white;
-  --tg-theme-section-header-text-color: #aaaaaa; */
+  --tg-theme-section-header-text-color: #aaaaaa;
+  --tg-theme-header-bg-color: #1a191b; */
 }
 
 body {

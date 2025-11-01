@@ -1,8 +1,6 @@
 'use client'
 import styles from './header.module.css';
 
-
-
 import { Logo } from "@/components/shared/Logo"
 
 import { useUserStore } from '@/store/useStore';

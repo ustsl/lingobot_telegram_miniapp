@@ -1,1 +1,0 @@
-export { SimpleSlider } from "./ui/SimpleSlider";

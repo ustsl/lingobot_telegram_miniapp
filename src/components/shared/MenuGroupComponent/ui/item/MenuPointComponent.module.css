@@ -1,0 +1,16 @@
+.point {
+  width: 100;
+  padding: 10px 20px;
+  background-color: var(--tg-theme-bg-color);
+  border-radius: var(--border-radius);
+}
+
+.point span {
+  color: var(--tg-theme-text-color);
+  font-size: var(--m-font-size);
+  transition: all 0.3s ease;
+}
+
+.point:hover span {
+  color: var(--tg-theme-section-header-text-color);
+}
