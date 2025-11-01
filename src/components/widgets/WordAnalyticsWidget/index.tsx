@@ -1,0 +1,1 @@
+export { WordAnalyticsWidget } from "./ui/WordAnalyticsWidget";

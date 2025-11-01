@@ -1,0 +1,74 @@
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.chart {
+  display: block;
+}
+
+.segment {
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.center {
+  fill: var(--tg-theme-bg-color);
+}
+
+.totalNumber {
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--tg-theme-text-color);
+}
+
+.totalLabel {
+  font-size: 10px;
+  fill: var(--tg-theme-hint-color);
+}
+
+.legend {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.colorBox {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legendLabel {
+  color: var(--tg-theme-hint-color);
+  min-width: 120px;
+}
+
+.legendValue {
+  color: var(--tg-theme-hint-color);
+}
+
+.legendPct {
+  color: var(--tg-theme-hint-color);
+  margin-left: 6px;
+}
+
+.muted {
+  color: var(--tg-theme-hint-color);
+}
+
+.error {
+  color: #c00;
+}
+
+.loading {
+  color: var(--tg-theme-hint-color);
+}

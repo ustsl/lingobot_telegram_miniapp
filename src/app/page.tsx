@@ -9,6 +9,7 @@ import { LinkComponent } from '@/components/shared/LinkComponent'
 import { FooterMenuComponent, MenuGroupComponent, MenuPointComponent } from '@/components/shared/MenuGroupComponent'
 import { ExploreIcon } from '@/icons/ui/base/explore'
 import { TrainIcon } from '@/icons/ui/base/train'
+import { WordAnalyticsWidget } from '@/components/widgets/WordAnalyticsWidget'
 
 
 export default function Home() {
@@ -21,9 +22,10 @@ export default function Home() {
           <MenuPointComponent text={'Выбрать новые слова на изучение'} href={'/train/new'} />
           <MenuPointComponent text={'Интервальное повторение словаря'} href={'/train/repeat'} />
           <MenuPointComponent text={'Открыть текущий словарь'} href={'/data/words'} />
-
           <FooterMenuComponent title={'Настроить тренажер слов'} children={<SettingsMenu />} />
         </MenuGroupComponent>
+
+        <WordAnalyticsWidget />
 
         <MenuGroupComponent title="Дополнительные тренажеры" icon={<TrainIcon />}>
           <MenuPointComponent text={'Тренировка времен глаголов'} href={'/grammatic/verbs'} />
