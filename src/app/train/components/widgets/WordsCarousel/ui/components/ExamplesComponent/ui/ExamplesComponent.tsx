@@ -161,7 +161,7 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
 
                                 <FlexBlock alignment='start'>
                                     <AddSentenceComponent sentence={item.sentence} ru={item.ru} />
-                                    <RegularButtonComponent text={loadingPk === item.pk ? 'Загрузка...' : 'Посмотреть правила'}
+                                    <RegularButtonComponent text={loadingPk === item.pk ? 'Загрузка...' : 'Правила'}
                                         onClick={() => handleShowRules(item)} />
                                 </FlexBlock>
 
