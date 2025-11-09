@@ -1,5 +1,4 @@
-import axios from "axios";
-import { API_DOMAIN, API_VERSION, HEADERS, REVALIDATE_PARAM } from "./settings";
+import { REVALIDATE_PARAM } from "./settings";
 import { notFound } from "next/navigation";
 
 export interface IAPI {
@@ -14,10 +13,11 @@ export interface IAPIPost extends IAPI {
 }
 
 export async function getBaseQuery(method: string) {
-  const url = API_DOMAIN + API_VERSION + method;
-
-  const res = await fetch(url, {
-    headers: HEADERS,
+  // Proxy GET via internal server route so the secret key is not exposed client-side.
+  const res = await fetch("/api/proxy", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ method, verb: "GET" }),
     next: { revalidate: REVALIDATE_PARAM },
   });
 
@@ -28,10 +28,15 @@ export async function getBaseQuery(method: string) {
 }
 
 export async function getResponse(method: string) {
-  const url = API_DOMAIN + API_VERSION + method;
+  // Use internal proxy route and return an axios-like shape: { data, status }
   try {
-    const response = await axios.get(url, { headers: { ...HEADERS } });
-    return response;
+    const res = await fetch("/api/proxy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method, verb: "GET" }),
+    });
+    const data = await res.json().catch(() => null);
+    return { data, status: res.status } as any;
   } catch (error) {
     return raiseAxiosError(error);
   }
@@ -44,17 +49,15 @@ export async function postResponse({
   method: string;
   data: any;
 }) {
-  const url = API_DOMAIN + API_VERSION + method;
-  const res = await fetch(url, {
+  // Proxy POST through server route
+  const res = await fetch("/api/proxy", {
     method: "POST",
-    headers: {
-      ...HEADERS,
-    },
-    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ method, data, verb: "POST" }),
   });
 
   if (!res.ok) {
-    const errorBody = await res.json();
+    const errorBody = await res.json().catch(() => null);
     console.error("API error response:", errorBody);
     return false;
   }
@@ -69,20 +72,14 @@ export async function putResponse({
   method: string;
   data: any;
 }) {
-  const url = API_DOMAIN + API_VERSION + method;
-  const res = await fetch(url, {
-    method: "PUT",
-    headers: {
-      ...HEADERS,
-    },
-    body: JSON.stringify(data),
+  const res = await fetch("/api/proxy", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ method, data, verb: "PUT" }),
   });
 
   if (!res.ok) {
-    console.log(data);
-    console.log(res);
-    console.log(res.statusText);
-    const errorBody = await res.json();
+    const errorBody = await res.json().catch(() => null);
     console.error("API error response:", errorBody);
     return false;
   }
@@ -91,12 +88,16 @@ export async function putResponse({
 }
 
 export async function patchResponse({ token, body, method }: IAPIPost) {
-  const url = API_DOMAIN + API_VERSION + method;
-  const headers = createHeaders(token);
+  // For endpoints that require a per-user token we still forward token
+  // to the server proxy which will include it in the upstream request.
   try {
-    const response = await axios.patch(url, body, { headers });
-
-    return response;
+    const res = await fetch("/api/proxy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method, data: body, verb: "PATCH", token }),
+    });
+    const data = await res.json().catch(() => null);
+    return { data, status: res.status } as any;
   } catch (error) {
     console.log(error);
     return raiseAxiosError(error);
@@ -104,23 +105,23 @@ export async function patchResponse({ token, body, method }: IAPIPost) {
 }
 
 export async function deleteResponse({ token, method }: IAPI) {
-  const url = API_DOMAIN + API_VERSION + method;
-  const headers = createHeaders(token);
   try {
-    const response = await axios.delete(url, { headers });
-    return response;
+    const res = await fetch("/api/proxy", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method, verb: "DELETE", token }),
+    });
+    const data = await res.json().catch(() => null);
+    return { data, status: res.status } as any;
   } catch (error) {
     return raiseAxiosError(error);
   }
 }
 
 export function raiseAxiosError(error: string | unknown) {
-  if (axios.isAxiosError(error)) {
-    console.log(error);
-    return error.response;
-  }
+  // Keep a compatible interface for existing callers.
   console.error(error);
-  throw error;
+  return null;
 }
 
 export function createHeaders(token: string) {

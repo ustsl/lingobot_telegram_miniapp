@@ -13,6 +13,7 @@ export const useBaseStore = create((set) => ({
     set(() => ({
       tg: tg,
       userId: tg?.initDataUnsafe?.user?.id,
+      // Для разработки юзера нужно закомментировать и раскомментировать айди ниже
       //userId: 315854463,
     })),
   removeTg: () => set({ tg: null }),

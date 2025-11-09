@@ -30,7 +30,7 @@ export const AddSentenceComponent = ({ sentence, ru }: { sentence: string, ru: s
 
     return (
         <>
-            <RegularButtonComponent text={'Добавить в личный словарь'} onClick={handleSave} />
+            <RegularButtonComponent text={'В личный словарь'} onClick={handleSave} />
             {notificationMessage && <NotificationComponent message={notificationMessage} />}
         </>
 

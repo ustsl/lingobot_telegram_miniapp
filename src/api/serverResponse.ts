@@ -1,13 +1,23 @@
 "use server";
 
-import { HEADERS } from "./settings";
-
+// Server-side helper to fetch word analytics directly from upstream API.
+// This file runs on the server only and reads the secret key from process.env.
 export type WordAnalytics = {
   total: number;
   finished: number;
   learning: number;
   passive: number;
 };
+
+function buildServerHeaders(token?: string) {
+  const raw = token || process.env.API_SECRET_KEY || "";
+  const auth = raw.startsWith("Token ") ? raw : `Token ${raw}`;
+  return {
+    "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest",
+    Authorization: auth,
+  };
+}
 
 export async function getWordAnalytics(
   telegramId: string
@@ -20,7 +30,7 @@ export async function getWordAnalytics(
 
   const res = await fetch(url, {
     method: "GET",
-    headers: HEADERS,
+    headers: buildServerHeaders(),
     cache: "no-store",
   });
 
