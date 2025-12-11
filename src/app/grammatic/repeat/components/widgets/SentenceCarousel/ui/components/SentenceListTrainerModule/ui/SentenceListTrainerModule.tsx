@@ -73,7 +73,7 @@ export const SentenceListTrainerModule: React.FC<Props> = ({
                 <CardAnimationWrapper keyUniq={keyUniq}>
                     <CardWrapper>
                         <GridBlock gridSize="M">
-                            <p>{currentItem.ru}</p>
+                            <p>{currentItem.translate}</p>
 
                             <SentenceBuilderComponent
                                 key={childKey}

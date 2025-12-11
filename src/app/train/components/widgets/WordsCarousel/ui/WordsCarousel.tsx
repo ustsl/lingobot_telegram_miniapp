@@ -30,16 +30,17 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     const [limit, setLimit] = useState(0)
     const [wordList, setWordList] = useState<any[]>([])
     const userId = useBaseStore((state: any) => state.userId)
+    const pair = useBaseStore((state: any) => state.pair)
     const trainType = useUserStore((state: any) => state.trainType)
     const [exceptions, setExceptions] = useState<any[]>([])
 
     useEffect(() => {
         console.log('trainUseEffect')
-        if (userId) {
+        if (userId && pair) {
             handleGetUserData(userId)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userId]);
+    }, [userId, pair]);
 
 
 
@@ -65,13 +66,13 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
 
         const data = {
             method: '/word/get_new_word_one/',
-            data: { user: userId, exception_word: Array.from(updatedExceptions).join(',') }
+            data: { user: userId, exception_word: Array.from(updatedExceptions).join(','), pair }
         };
 
         setExceptions(Array.from(updatedExceptions));
 
         postResponse(data).then((result: any) => {
-            sendAddWord(userId, wordList[0].pk, true)
+            sendAddWord(userId, wordList[0].pk, true, pair)
             if (result && result?.word_list && result?.status && (result.word_list).length > 0) {
                 const item = result.word_list[0]
                 setWordList([item, ...wordList.slice(1)])
@@ -85,13 +86,10 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         setUniqStep(prevStep => prevStep + 1);
 
 
-        console.log(wordList[0])
-        console.log(879877987)
-
         if (phase == 'repeat') {
-            sendRepeatProgress(userId, wordList[0].pk, true)
+            sendRepeatProgress(userId, wordList[0].pk, true, pair)
         } else {
-            sendAddWord(userId, wordList[0].pk, false)
+            sendAddWord(userId, wordList[0].pk, false, pair)
         }
 
         setWordList(prevWordList => [...prevWordList.slice(1)]);
@@ -101,7 +99,7 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
         console.log('get-words')
         const data = {
             method: query,
-            data: { user: userId }
+            data: { user: userId, pair }
         }
         postResponse(data).then((result: any) => {
             if (result) {
@@ -118,10 +116,10 @@ export const WordsCarousel = ({ query, phase }: { query: string, phase: 'new' | 
     }
 
     let wordKey: keyof IWordEntry = 'word';
-    let translateKey: keyof IWordEntry = 'ru';
+    let translateKey: keyof IWordEntry = 'translate';
 
     if (trainType === 'RU') {
-        wordKey = 'ru'
+        wordKey = 'translate'
         translateKey = 'word'
     }
 

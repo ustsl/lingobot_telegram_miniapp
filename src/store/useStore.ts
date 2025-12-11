@@ -9,6 +9,13 @@ export const useModalStore = create((set) => ({
 export const useBaseStore = create((set) => ({
   tg: null,
   userId: null,
+  pair: "tr-ru" as string | null,
+  initPairFromLocation: () => {
+    if (typeof window === "undefined") return;
+    const pair = new URLSearchParams(window.location.search).get("pair");
+    if (pair) set({ pair });
+  },
+  setPair: (pair: string | null) => set({ pair }),
   setTg: (tg: any) =>
     set(() => ({
       tg: tg,

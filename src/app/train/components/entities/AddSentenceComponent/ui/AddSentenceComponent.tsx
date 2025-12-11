@@ -4,7 +4,7 @@ import { RegularButtonComponent } from "@/components/shared/RegularButtonCompone
 import { useBaseStore } from "@/store/useStore";
 import { useState } from "react";
 
-export const AddSentenceComponent = ({ sentence, ru }: { sentence: string, ru: string }) => {
+export const AddSentenceComponent = ({ sentence, translate}: { sentence: string, translate: string }) => {
 
     const userId = useBaseStore((state: any) => state.userId);
     const [notificationMessage, setNotificationMessage] = useState('');
@@ -16,7 +16,7 @@ export const AddSentenceComponent = ({ sentence, ru }: { sentence: string, ru: s
             data: {
                 user: userId,
                 sentence: sentence,
-                ru: ru
+                translate: translate
             }
         };
 

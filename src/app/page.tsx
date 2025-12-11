@@ -28,7 +28,6 @@ export default function Home() {
         <WordAnalyticsWidget />
 
         <MenuGroupComponent title="Дополнительные тренажеры" icon={<TrainIcon />}>
-          <MenuPointComponent text={'Тренировка времен глаголов'} href={'/grammatic/verbs'} />
           <MenuPointComponent text={'Собираем предложения из слов'} href={'/grammatic/repeat'} />
           <MenuPointComponent text={'Открыть добавленные предложения'} href={'/data/sentences'} />
 

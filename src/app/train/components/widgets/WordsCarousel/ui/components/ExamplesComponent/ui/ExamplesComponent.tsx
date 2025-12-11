@@ -156,11 +156,11 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
                             <div className={styles.slide}>
                                 <GridBlock gridSize='XS'>
                                     <p className={styles.tr}>{item.sentence}</p>
-                                    <p className={styles.ru}>{item.ru}</p>
+                                    <p className={styles.ru}>{item.translate}</p>
                                 </GridBlock>
 
                                 <FlexBlock alignment='start'>
-                                    <AddSentenceComponent sentence={item.sentence} ru={item.ru} />
+                                    <AddSentenceComponent sentence={item.sentence} translate={item.translate} />
                                     <RegularButtonComponent text={loadingPk === item.pk ? 'Загрузка...' : 'Правила'}
                                         onClick={() => handleShowRules(item)} />
                                 </FlexBlock>

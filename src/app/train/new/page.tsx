@@ -5,7 +5,6 @@ import { WordsCarousel } from "../components/widgets/WordsCarousel";
 import { FullScreen } from "@/components/shared/FullScreen/ui/FullScreen";
 
 
-
 export default function NewWordTrainer() {
 
     return (

@@ -72,11 +72,15 @@ export async function POST(req: Request) {
       body: payload,
     });
 
+    console.log(upstream)
+
     const contentType = upstream.headers.get('content-type') || '';
     if (contentType.includes('application/json')) {
       const json = await upstream.json();
       return NextResponse.json(json, { status: upstream.status });
     }
+
+
 
     const text = await upstream.text();
     return new Response(text, { status: upstream.status, headers: { 'Content-Type': contentType } });

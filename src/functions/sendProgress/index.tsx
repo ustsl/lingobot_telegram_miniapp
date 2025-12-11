@@ -1,14 +1,15 @@
 import { postResponse, putResponse } from "@/api/restAPI";
 
 
-export function sendRepeatProgress(userId: number | string, word: number, raise: boolean) {
+export function sendRepeatProgress(userId: number | string, word: number, raise: boolean, pair?: string | null) {
 
     const data = {
         method: '/word_actions/train',
         data: {
             user: userId,
             id: word,
-            raise: raise
+            raise: raise,
+            pair
         }
     }
     console.log(data)
@@ -16,13 +17,14 @@ export function sendRepeatProgress(userId: number | string, word: number, raise:
 }
 
 
-export function sendAddWord(userId: number | string, word: number, is_studied: boolean) {
+export function sendAddWord(userId: number | string, word: number, is_studied: boolean, pair?: string | null) {
     const data = {
         method: '/word_actions/train',
         data: {
             user: userId,
             id: word,
-            is_studied: is_studied
+            is_studied: is_studied,
+            pair
         }
     }
     postResponse(data);

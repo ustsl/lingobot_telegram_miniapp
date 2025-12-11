@@ -11,6 +11,8 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const { tg } = useTelegram()
 
     const userId = useBaseStore((state: any) => state.userId)
+    const pair = useBaseStore((state: any) => state.pair)
+    const initPairFromLocation = useBaseStore((state: any) => state.initPairFromLocation)
     const isLoad = useUserStore((state: any) => state.isLoad)
     const setIsLoad = useUserStore((state: any) => state.setIsLoad)
     const setSubscribeFinishDate = useUserStore((state: any) => state.setSubscribeFinishDate)
@@ -18,16 +20,19 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const setRepeatWordLimit = useUserStore((state: any) => state.setRepeatWordLimit)
     const setTrainType = useUserStore((state: any) => state.setTrainType)
     const setUserCategories = useUserStore((state: any) => state.setUserCategories)
+    useEffect(() => {
+        initPairFromLocation();
+    }, [initPairFromLocation]);
 
     useEffect(() => {
         console.log(userId)
-        if (userId) {
+        if (userId && pair) {
             if (handleGetUserData(userId)) {
                 handlePostStatData(userId)
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userId]);
+    }, [userId, pair]);
 
 
     function handlePostStatData(userId: number) {
@@ -85,10 +90,7 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
 
     return (
         <>
-            {tg && isLoad && children}
+            {tg && isLoad  && children}
         </>
     )
 }
-
-
-

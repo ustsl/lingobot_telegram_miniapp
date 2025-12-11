@@ -2,6 +2,8 @@
 
 // Server-side helper to fetch word analytics directly from upstream API.
 // This file runs on the server only and reads the secret key from process.env.
+import { API_URL } from "./settings";
+
 export type WordAnalytics = {
   total: number;
   finished: number;
@@ -24,9 +26,7 @@ export async function getWordAnalytics(
 ): Promise<WordAnalytics> {
   if (!telegramId) throw new Error("telegramId is required");
 
-  const url = `https://api.lingobot.ru/v1/user_analytics/words?telegram_id=${encodeURIComponent(
-    telegramId
-  )}`;
+  const url = `${API_URL}/user_analytics/words?telegram_id=${encodeURIComponent(telegramId)}`;
 
   const res = await fetch(url, {
     method: "GET",

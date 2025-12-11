@@ -1,4 +1,3 @@
-import { getBaseQuery } from "@/api/restAPI"
 import { CategoryList } from "./components/CategoryList"
 import { BodyComponent } from "@/components/shared/Body"
 import { Header } from "@/components/widgets/Header"

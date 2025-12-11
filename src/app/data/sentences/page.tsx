@@ -24,6 +24,7 @@ export default function LimitPage() {
     const [search, setSearch] = useState('')
 
     const userId = useBaseStore((state: any) => state.userId);
+    const pair = useBaseStore((state: any) => state.pair);
 
     const observer = useRef<IntersectionObserver | null>(null);
     const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -35,6 +36,7 @@ export default function LimitPage() {
             data: {
                 user: userId,
                 id: id,
+                pair,
             },
         };
 
@@ -60,7 +62,7 @@ export default function LimitPage() {
         paginatedFetch<ISentenceListItem>(
             "/sentence_actions/get_user_list",
             currentPage,
-            { user: userId, search }
+            { user: userId, search, pair }
         )
             .then(({ results: items, count, next }) => {
                 setCount(count)
@@ -73,12 +75,12 @@ export default function LimitPage() {
 
 
     useEffect(() => {
-        if (!userId) return;
+        if (!userId || !pair) return;
         if (page !== 1) {
             handleLoad(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, userId]);
+    }, [page, userId, pair]);
 
 
     useEffect(() => {
