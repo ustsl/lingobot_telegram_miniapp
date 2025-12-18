@@ -12,7 +12,7 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
 
     const userId = useBaseStore((state: any) => state.userId)
     const pair = useBaseStore((state: any) => state.pair)
-    const initPairFromLocation = useBaseStore((state: any) => state.initPairFromLocation)
+    const setPair = useBaseStore((state: any) => state.setPair)
     const isLoad = useUserStore((state: any) => state.isLoad)
     const setIsLoad = useUserStore((state: any) => state.setIsLoad)
     const setSubscribeFinishDate = useUserStore((state: any) => state.setSubscribeFinishDate)
@@ -20,9 +20,13 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
     const setRepeatWordLimit = useUserStore((state: any) => state.setRepeatWordLimit)
     const setTrainType = useUserStore((state: any) => state.setTrainType)
     const setUserCategories = useUserStore((state: any) => state.setUserCategories)
+
     useEffect(() => {
-        initPairFromLocation();
-    }, [initPairFromLocation]);
+        if (typeof window === "undefined") return;
+        const pair = new URLSearchParams(window.location.search).get("pair");
+        console.log(pair)
+        setPair(pair)
+    }, []);
 
     useEffect(() => {
         console.log(userId)
@@ -90,7 +94,7 @@ export const TelegramWrapper = ({ children }: { children: React.ReactNode }) => 
 
     return (
         <>
-            {tg && isLoad  && children}
+            {tg && isLoad && pair && children}
         </>
     )
 }

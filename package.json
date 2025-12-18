@@ -14,20 +14,20 @@
     "@fortawesome/react-fontawesome": "^3.1.1",
     "axios": "^1.13.2",
     "classnames": "^2.5.1",
-    "next": "16.0.7",
-    "react": "19.2.1",
-    "react-dom": "19.2.1",
+    "next": "16.0.10",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-transition-group": "^4.4.5",
     "swiper": "^12.0.3",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
-    "@types/node": "^24",
+    "@types/node": "^25",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@types/react-transition-group": "^4.4.12",
     "eslint": "^9",
-    "eslint-config-next": "16.0.7",
+    "eslint-config-next": "16.0.10",
     "typescript": "^5"
   },
   "overrides": {

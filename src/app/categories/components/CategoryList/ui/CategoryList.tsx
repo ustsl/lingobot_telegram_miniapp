@@ -15,6 +15,7 @@ interface ICategory {
 }
 
 export const CategoryList = () => {
+    const pair = useBaseStore((state: any) => state.pair)
     const userId = useBaseStore((state: any) => state.userId);
     const [categories, setCategories] = useState<CategoryWord[]>([])
     const [isLoad, setIsLoad] = useState(false)
@@ -37,8 +38,8 @@ export const CategoryList = () => {
     function handleSetCategoryData(userId: number) {
         console.log('get-categories')
         const data = {
-            method: "/word/get_user_word_categories/",
-            data: { user: userId }
+            method: `/word/get_user_word_categories/`,
+            data: { user: userId, pair: pair }
         }
         postResponse(data)
             .then((result: any) => {

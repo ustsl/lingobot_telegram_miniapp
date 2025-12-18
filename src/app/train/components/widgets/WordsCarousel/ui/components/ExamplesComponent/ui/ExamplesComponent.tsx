@@ -17,13 +17,18 @@ import { useState } from 'react';
 import { useModalWrapper } from '@/components/shared/ModalWindowWrapper';
 import { FlexBlock } from '@/components/shared/FlexBlock';
 import { RegularButtonComponent } from '@/components/shared/RegularButtonComponent';
+import { useBaseStore } from '@/store/useStore';
 
-const PROMPT_ID = "aa5c1440-02d8-4e63-bbb2-a97c69e1bd29";
+const PROMPT_IDS: Record<string, string> = {
+    'tr-ru': 'aa5c1440-02d8-4e63-bbb2-a97c69e1bd29',
+    'en-ru': '93991392-81a1-4c9f-9c67-b16cf8c4ceb7',
+};
 
 export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
     const [loadingPk, setLoadingPk] = useState<number | null>(null);
     const [errorState, setErrorState] = useState<{ pk: number; message: string } | null>(null);
     const { setContentModal, setIsOpenModal, setModalStyle } = useModalWrapper();
+    const pair = useBaseStore((state: any) => state.pair) as string | null;
 
     const openRulesModal = (html: string, example: ISentence) => {
         setModalStyle('base');
@@ -67,7 +72,7 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
         }
     };
 
-    const requestRulesFromAI = async (example: ISentence) => {
+    const requestRulesFromAI = async (example: ISentence, promptId: string) => {
         const response = await fetch('/api/proxy', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -75,7 +80,7 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
                 method: 'imvoRules',
                 verb: 'POST',
                 data: {
-                    prompt_id: PROMPT_ID,
+                    prompt_id: promptId,
                     query: example.sentence,
                 },
             }),
@@ -118,6 +123,13 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
             return;
         }
 
+        const normalizedPair = pair ? pair.toLowerCase() : '';
+        const promptId = PROMPT_IDS[normalizedPair];
+        if (!promptId) {
+            setErrorState({ pk: example.pk, message: 'Правила недоступны для выбранной языковой пары' });
+            return;
+        }
+
         setErrorState(null);
         setLoadingPk(example.pk);
 
@@ -129,7 +141,7 @@ export const ExamplesComponent = ({ examples }: { examples: ISentence[] }) => {
                 return;
             }
 
-            const aiRules = await requestRulesFromAI(example);
+            const aiRules = await requestRulesFromAI(example, promptId);
             openRulesModal(aiRules, example);
             await saveExplanation(example.pk, aiRules);
         } catch (error: any) {

@@ -25,7 +25,7 @@ export const SentenceCarousel = () => {
 
     const [isLoad, setIsLoad] = useState(false);
     const [limit, setLimit] = useState(0)
-
+    const pair = useBaseStore((state: any) => state.pair)
     const userId = useBaseStore((state: any) => state.userId)
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export const SentenceCarousel = () => {
         console.log('get-sentences')
         const data = {
             method: "/sentence_actions/get_train_list",
-            data: { user: userId }
+            data: { user: userId, pair: pair }
         }
         postResponse(data)
             .then((result: any) => {

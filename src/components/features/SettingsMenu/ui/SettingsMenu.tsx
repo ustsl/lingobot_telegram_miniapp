@@ -36,7 +36,7 @@ export const SettingsMenu = () => {
     return (
         <GridBlock gridSize='M'>
             <GridBlock gridSize="S">
-                <PointName text="Режим перевода" icon={<SettingsIcon />} />
+                <PointName text="Режим тренажера слов" icon={<SettingsIcon />} />
                 <GridBlock gridSize="XS">
                     <label >
                         <input
@@ -46,7 +46,7 @@ export const SettingsMenu = () => {
                             checked={trainType === 'TR'}
                             onChange={handleTrainTypeChange}
                         />
-                        С турецкого на русский
+                        Перевод на русский
                     </label>
                     <label className='xslabel'>
                         <input
@@ -56,7 +56,7 @@ export const SettingsMenu = () => {
                             checked={trainType === 'RU'}
                             onChange={handleTrainTypeChange}
                         />
-                        С русского на турецкий
+                        Перевод с русского
                     </label>
                 </GridBlock>
                 <GridBlock gridSize="XS">

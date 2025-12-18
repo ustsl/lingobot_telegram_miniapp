@@ -22,11 +22,12 @@ function buildServerHeaders(token?: string) {
 }
 
 export async function getWordAnalytics(
-  telegramId: string
+  telegramId: string,
+  pair: string
 ): Promise<WordAnalytics> {
   if (!telegramId) throw new Error("telegramId is required");
 
-  const url = `${API_URL}/user_analytics/words?telegram_id=${encodeURIComponent(telegramId)}`;
+  const url = `${API_URL}/user_analytics/words?telegram_id=${encodeURIComponent(telegramId)}&pair=${encodeURIComponent(pair)}`;
 
   const res = await fetch(url, {
     method: "GET",

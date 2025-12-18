@@ -1,3 +1,5 @@
+'use client'
+
 import { Header } from '@/components/widgets/Header'
 import { BodyComponent } from '@/components/shared/Body'
 import { SettingsMenu } from '../components/features/SettingsMenu'
@@ -10,13 +12,16 @@ import { FooterMenuComponent, MenuGroupComponent, MenuPointComponent } from '@/c
 import { ExploreIcon } from '@/icons/ui/base/explore'
 import { TrainIcon } from '@/icons/ui/base/train'
 import { WordAnalyticsWidget } from '@/components/widgets/WordAnalyticsWidget'
+import { useBaseStore } from '@/store/useStore'
 
 
 export default function Home() {
-
+  const pair = useBaseStore((state: any) => state.pair)
   return (
     <>
+
       <Header />
+
       <BodyComponent>
         <MenuGroupComponent title="Тренажер слов" icon={<ExploreIcon />}>
           <MenuPointComponent text={'Выбрать новые слова на изучение'} href={'/train/new'} />
@@ -30,14 +35,12 @@ export default function Home() {
         <MenuGroupComponent title="Дополнительные тренажеры" icon={<TrainIcon />}>
           <MenuPointComponent text={'Собираем предложения из слов'} href={'/grammatic/repeat'} />
           <MenuPointComponent text={'Открыть добавленные предложения'} href={'/data/sentences'} />
-
         </MenuGroupComponent>
 
 
         <GridBlock gridSize="XS">
-          <LinkComponent href="https://lingobot.ru/book/" text="Учебник на сайте" size='S' />
+          <LinkComponent href="https://lingobot.ru" text="Сайт приложения" size='S' />
           <LinkComponent href="https://t.me/ustsl" text="Техническая поддержка" size='S' />
-
         </GridBlock>
 
       </BodyComponent >

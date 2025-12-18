@@ -7,6 +7,7 @@ import { getWordAnalytics, type WordAnalytics } from '@/api/serverResponse';
 
 export const WordAnalyticsWidget = () => {
     const userId = useBaseStore((s: any) => s.userId) as string | number | undefined;
+    const pair = useBaseStore((state: any) => state.pair)
 
     const [data, setData] = useState<WordAnalytics | null>(null);
     const [err, setErr] = useState<string | null>(null);
@@ -17,7 +18,7 @@ export const WordAnalyticsWidget = () => {
         if (!hasId) return;
         let canceled = false;
 
-        getWordAnalytics(String(userId))
+        getWordAnalytics(String(userId), String(pair))
             .then((d) => !canceled && setData(d))
             .catch((e) => !canceled && setErr(e?.message || 'error'));
 

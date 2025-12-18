@@ -18,10 +18,10 @@ export const WordComponent = ({ item, wordKey, translateKey }: { item: IWordEntr
     return (
 
         <CardWrapper>
-            <GridBlock gridSize='XS'>
-                <WordNameComponent word={item[wordKey] as string} />
-                <AudioComponent soundPath={item.sound} />
-            </GridBlock>
+
+            <WordNameComponent word={item[wordKey] as string} />
+            {/* <AudioComponent soundPath={item.sound} /> */}
+
             {isReveal ?
                 <div className={styles.details}>
                     <TranslateComponent word={item[translateKey] as string} transcription={item.transcription} />
