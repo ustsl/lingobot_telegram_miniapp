@@ -16,6 +16,7 @@ import { SearchStringComponent } from "@/components/entities/SearchStringCompone
 
 export default function LimitPage() {
     const userId = useBaseStore((s: any) => s.userId)
+    const pair = useBaseStore((s: any) => s.pair)
     const [search, setSearch] = useState("")
     const [page, setPage] = useState(1)
     const [results, setResults] = useState<ISentenceListItem[]>([])
@@ -46,7 +47,7 @@ export default function LimitPage() {
         paginatedFetch<ISentenceListItem>(
             "/word_actions/get_user_list",
             currentPage,
-            { user: userId, search }
+            { user: userId, search, pair }
         )
             .then(({ results: items, count, next }) => {
                 setCount(count)
@@ -57,12 +58,12 @@ export default function LimitPage() {
     }
 
     useEffect(() => {
-        if (!userId) return;
+        if (!userId || !pair) return;
         if (page !== 1) {
             handleLoad(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, userId]);
+    }, [page, userId, pair]);
 
 
     // сброс и загрузка при изменении поиска
